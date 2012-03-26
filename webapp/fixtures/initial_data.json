@@ -3,8 +3,8 @@
         "pk": 1, 
         "model": "sites.site", 
         "fields": {
-            "domain": "django_blank_project.com",
-            "name": "django_blank_project.com"
+            "domain": "coolbookmark.com",
+            "name": "Cool Bookmark"
         }
     }
 ]
