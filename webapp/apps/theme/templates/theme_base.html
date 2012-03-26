@@ -1,0 +1,117 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block head_title_base %}{% if SITE_NAME %}{{ SITE_NAME }} : {% endif %}{% block head_title %}{% endblock %}{% endblock %}</title>
+        {% block viewport %}
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% endblock %}
+
+        {% block style_base %}
+            <link href="{% get_static_prefix %}pinax/css/theme.css" rel="stylesheet">
+            <link href="{% get_static_prefix %}bootstrap/css/bootstrap.css" rel="stylesheet">
+            <link href="{% get_static_prefix %}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+            {% block extra_style %}{% endblock %}
+        {% endblock %}
+
+        <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {% block extra_head_base %}
+            {% block extra_head %}{% endblock %}
+        {% endblock %}
+    </head>
+    <body class="{% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}">
+
+        {% block topbar_base %}
+            <div class="navbar {% block navbar_class %}navbar-fixed-top{% endblock %}">
+                <div class="navbar-inner">
+                    <div class="container">
+                        {% block topbar %}
+                            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                            {% block site_brand %}<a class="brand" href="{% url home %}">{{ SITE_NAME }}</a>{% endblock %}
+                            <div class="nav-collapse">
+                                {% block nav %}
+                                    {% comment %}
+                                        <ul class="nav">
+                                            <li><a href="#tab_one">One</a></li>
+                                            <li><a href="#tab_two">Two</a></li>
+                                        </ul>
+                                    {% endcomment %}
+                                {% endblock %}
+                                {% block account_bar %}{% include "_account_bar.html" %}{% endblock %}
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block body_base %}
+            <div class="container">               	
+                {% block sub-nav %}{% endblock %}
+                {% include "_messages.html" %}
+                {% block body %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block footer_base %}
+            <div id="footer">
+                <div class="inner">
+                    <div class="container">
+                        {% block footer %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block extra_body_base %}
+            {% block extra_body %}{% endblock %}
+        {% endblock %}
+
+        {% block script_base %}
+            <script src="{% get_static_prefix %}pinax/js/jquery-1.7.1.min.js"></script>
+            <script src="{% get_static_prefix %}pinax/js/jquery.form.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-alert.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-button.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-carousel.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-collapse.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-dropdown.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-scrollspy.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-tab.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-tooltip.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-popover.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-transition.js"></script>
+            <script src="{% get_static_prefix %}bootstrap/js/bootstrap-typeahead.js"></script>
+            <script src="{% get_static_prefix %}pinax/js/theme.js"></script>
+            <script src="{% get_static_prefix %}pinax/js/pinax.modal.js"></script>
+            {% block extra_script %}
+				<script src="{% get_static_prefix %}js/jquery.dataTables.js"></script>
+			    <script src="{% get_static_prefix %}js/DT_bootstrap.js"></script>
+			    <script charset="utf-8" type="text/javascript">
+			        $(document).ready(function () {
+			            /* Show pupover user */
+			            $(".popover-user").popover();
+
+			            /* Table initialisation */
+			            $('.datatable').dataTable( {
+			                "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+			                "sPaginationType": "bootstrap",
+			                "oLanguage": {
+			                    "sLengthMenu": "_MENU_ records per page"
+			                }
+			            } );
+			        });
+			    </script>
+			{% endblock %}
+        {% endblock %}
+    </body>
+</html>

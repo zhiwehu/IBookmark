@@ -1,0 +1,6 @@
+*.pyc
+.idea
+dev.db
+env/*
+webapp/local_settings.py
+.DS_Store

@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify your email address" %}{% endblock %}
+
+{% block body %}
+    <h2>{% trans "Verify your email address" %}</h2>
+    <form style="display: none;" id="send_verification" method="post" action="{% url re_send_email %}">
+        {% csrf_token %}
+        <input type="hidden" name="email" value="{{ email }}"/>
+        <input type="hidden" name="action" value="send"/>
+    </form>
+    <p>{% blocktrans %}We have sent you an email to <b>{{ email }}</b> for verification. Follow the link provided to finalize the signup process. If you do not receive it within a few minutes, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a> or <a href="#" onclick="$('#send_verification').submit();">Re-send verification email</a>.{% endblocktrans %}</p>
+    <p><a href="{{ success_url }}">Go back</a></p>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block head_title %}{% trans "Social Relationship" %}{% endblock %}
+
+{% block body %}
+    <h2>{% trans "Social Relationship" %}</h2>
+
+        <p>{% trans "Associated" %}</p>
+        {% for item in social_auth.associated %}
+            <img src="{{ STATIC_URL }}img/{{ item.provider }}.png" />
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url socialauth_disconnect backend=item.provider %}"><button class="btn primary">{% trans "Disconnect" %}</button></a>
+            <br/>
+        {% empty %}
+        {% endfor %}
+<hr/>
+        <p>{% trans "Not associated" %}</p>
+
+        {% for item in social_auth.not_associated %}
+            <a href="{% url socialauth_associate_begin backend=item %}">
+                <img src="{{ STATIC_URL }}img/{{ item }}.png" /></a>
+        {% empty %}
+        {% endfor %}
+
+{% endblock %}

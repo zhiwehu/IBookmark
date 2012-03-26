@@ -1,0 +1,2 @@
+{% load i18n %}
+Confirm email address for {% autoescape off %} {{ current_site.name }} {% endautoescape %}

@@ -1,0 +1,4 @@
+{% load i18n %}
+User '{{ user }}' at {% autoescape off %} {{ current_site.name }} {% endautoescape %} has given this as an email address.
+
+To confirm this is correct, go to {{ activate_url }}
