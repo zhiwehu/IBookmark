@@ -4,7 +4,22 @@
 {% load bootstrap_tags %}
 
 {% block extra_script %}
-    <script charset="utf-8" type="text/javascript">
+
+    <script type="text/javascript">
+        function apply_form_field_error(fieldname, error) {
+            var input = $("#id_" + fieldname),
+                    container = input.parent("div").parent("div")
+            error_msg = $("<span />").addClass("help-inline ajax-error").text(error[0]);
+
+            container.addClass("error");
+            error_msg.insertAfter(input);
+        }
+
+        function clear_form_field_errors(form) {
+            $(".ajax-error", $(form)).remove();
+            $(".error", $(form)).removeClass("error");
+        }
+
         function create_bookmark() {
             send_dict = {
                 url:"{% url api_bookmarks %}",
@@ -23,13 +38,18 @@
                     }
                 },
                 error:function (xmlHttpRequest, textStatus, errorThrown) {
-                    //alert(xmlHttpRequest.responseText);
-                    $("#bookmark_form_error").html(xmlHttpRequest.responseText);
+                    var errors = $.parseJSON(xmlHttpRequest.responseText);
+                    $.each(errors, function (index, value) {
+                        if (index === "__all__") {
+                            //
+                        } else {
+                            apply_form_field_error(index, value);
+                        }
+                    });
                 }
             };
 
             $.ajax(send_dict);
-
             return false;
         }
 
@@ -37,6 +57,7 @@
 
             // submit data to create bookmark
             $("#bookmark_form").submit(function () {
+                clear_form_field_errors("#bookmark_form")
                 create_bookmark();
                 return false;
             });
@@ -60,7 +81,8 @@
     <div id="bookmark_form_modal" class="modal hide fade">
         <form id="bookmark_form" action="." method="post">
             <div class="modal-header">
-                <a class="close" data-dismiss="modal" >&times;</a>
+                <a class="close" data-dismiss="modal">&times;</a>
+
                 <h3>{% trans "Add bookmark" %}</h3>
             </div>
             <div id="bookmark_form_error"></div>

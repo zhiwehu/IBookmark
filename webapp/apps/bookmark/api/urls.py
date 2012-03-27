@@ -1,8 +1,21 @@
 from piston.resource import Resource
+import json
 from django.conf.urls.defaults import patterns, url
 from authentication import DjangoAuthentication
+from django.http import HttpResponseBadRequest
 from handlers import BookmarkHandler
+from piston.utils import rc
 from webapp.apps.bookmark.api.handlers import MyBookmarkHandler
+
+class Resource(Resource):
+
+    def form_validation_response(self, e):
+        """
+        Turns the error object into a serializable construct.
+        All credit for this method goes to Jacob Kaplan-Moss
+        """
+        return HttpResponseBadRequest(json.dumps(e.form.errors, ensure_ascii=False),
+            mimetype="application/json")
 
 auth = DjangoAuthentication()
 bookmark_handler = Resource(BookmarkHandler, authentication=auth)
