@@ -1,0 +1,27 @@
+{% extends "bookmark/base.html" %}
+
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block body %}
+    <div id="bookmark_form_model" class="modal hide fade">
+        <form id="form_bookmark" action="." method="post">
+            <div class="modal-header">
+                <a href="#" class="close">&times;</a>
+                <h3>{% trans "Add bookmark" %}</h3>
+            </div>
+            <div id="bookmark-error"></div>
+            <div class="modal-body">
+                {% csrf_token %}
+                <fieldset>
+                    {{ form|as_bootstrap }}
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_add_bookmark" class="btn large primary">{% trans "Submit" %}
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

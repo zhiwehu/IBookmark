@@ -21,6 +21,23 @@ from taggit.models import Tag
 from bookmark.forms import BookmarkForm
 from bookmark.models import Bookmark
 
+class MyBookmarkHandler(BaseHandler):
+    model = Bookmark
+    fields = ('id',
+              ('owner', ('id', 'username',)),
+              'title',
+              'url',
+              ('tags', ('name',)),
+              'public',
+              'screen_shot',
+              'create_time',
+              'last_modified_time',
+        )
+
+    def read(self, request):
+        bookmarks = Bookmark.objects.filter(owner = request.user)
+        return get_data(bookmarks, request)
+
 class BookmarkHandler(BaseHandler):
     model = Bookmark
     anonymous = 'AnonymousBookmarkHandler'
@@ -60,7 +77,7 @@ class BookmarkHandler(BaseHandler):
         bookmark.owner = request.user
         bookmark.save()
         form.save_m2m()
-        return rc.CREATED
+        return bookmark
 
     @validate(BookmarkForm)
     def update(self, request, bookmark_id):

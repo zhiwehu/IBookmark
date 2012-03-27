@@ -29,6 +29,8 @@ urlpatterns = patterns('',
 
     url(r'^setlang', 'django.views.i18n.set_language', name='set_language'),
 
+    url(r'^bookmark', include('bookmark.urls')),
+
     url(r'^api/', include('bookmark.api.urls')),
 )
 

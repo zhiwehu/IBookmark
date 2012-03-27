@@ -1,0 +1,79 @@
+{% extends "bookmark/base.html" %}
+
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block extra_script %}
+    <script charset="utf-8" type="text/javascript">
+        function create_bookmark() {
+            send_dict = {
+                url:"{% url api_bookmarks %}",
+                type:"POST",
+                data:$("#bookmark_form").serialize(),
+                processData:false,
+                dataType:"json",
+                success:function (json, textStatus) {
+                    if (json.redirect) {
+                        window.location.href = json.redirect;
+                    } else {
+                        $("#bookmark_form_error").html("");
+                        $("#bookmark_form_modal").modal("hide");
+                        $("#bookmark_form :input:not(:checkbox)").val("");
+                        // TODO
+                    }
+                },
+                error:function (xmlHttpRequest, textStatus, errorThrown) {
+                    //alert(xmlHttpRequest.responseText);
+                    $("#bookmark_form_error").html(xmlHttpRequest.responseText);
+                }
+            };
+
+            $.ajax(send_dict);
+
+            return false;
+        }
+
+        $(function () {
+
+            // submit data to create bookmark
+            $("#bookmark_form").submit(function () {
+                create_bookmark();
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <p>
+            {% if request.user.is_authenticated %}
+                <a href="#bookmark_form_modal"
+                   class="btn btn-success btn-large" data-toggle="modal">{% trans "Add bookmark" %}</a>
+            {% else %}
+                <a href="{% url acct_login %}?next={% url home %}"
+                   class="btn btn-success btn-large">{% trans "Add bookmark" %}</a>
+            {% endif %}
+        </p>
+    </div>
+
+    <div id="bookmark_form_modal" class="modal hide fade">
+        <form id="bookmark_form" action="." method="post">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal" >&times;</a>
+                <h3>{% trans "Add bookmark" %}</h3>
+            </div>
+            <div id="bookmark_form_error"></div>
+            <div class="modal-body">
+                {% csrf_token %}
+                <fieldset>
+                    {{ form|as_bootstrap }}
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_add_bookmark" class="btn large primary">{% trans "Submit" %}</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
