@@ -87,6 +87,7 @@ class BookmarkTestCase(TestCase):
             'public': public
         }
 
+
         # Put data not login
         response = self.client.put('/api/bookmarks/1/', bookmark_data)
         self.assertEqual(response.status_code, 302)
