@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     url(r'^about/', include('about.urls')),
 
     url(r'^setlang', 'django.views.i18n.set_language', name='set_language'),
+
+    url(r'^api/', include('bookmark.api.urls')),
 )
 
 if settings.DEBUG:

@@ -14,5 +14,5 @@ class BookmarkForm(ModelForm):
 
     class Meta:
         model = Bookmark
-        fields = ('title', 'url', 'tags', 'public')
-        exclude = ('owner', 'create_time', 'favorite_users', 'screenshot')
+        fields = ('url', 'title', 'tags', 'public')
+        exclude = ('owner', 'create_time', 'screen_shot', 'last_modified_time')

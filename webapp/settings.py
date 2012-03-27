@@ -139,13 +139,19 @@ INSTALLED_APPS = (
     'timezones',
     'emailconfirmation',
     'social_auth',
+    'taggit',
 
     # theme
     'theme',
+
+    # Building apps
     'account',
     'signup_codes',
     'sina_oauth2',
     'about',
+
+    # Apps
+    'bookmark',
     )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -169,7 +175,7 @@ ACCOUNT_OPEN_SIGNUP = True
 ACCOUNT_USE_SOCIAL=True
 ACCOUNT_REQUIRED_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = True
-ACCOUNT_EMAIL_AUTHENTICATION = True
+ACCOUNT_EMAIL_AUTHENTICATION = False
 ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = True
 
 AUTHENTICATION_BACKENDS = (

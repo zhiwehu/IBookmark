@@ -29,14 +29,14 @@ AUTHENTICATION_BACKENDS = (
 #    "social_auth.backends.contrib.flickr.FlickrBackend",
 #    "social_auth.backends.OpenIDBackend",
 #    "django.contrib.auth.backends.ModelBackend",
-#    "sina_oauth2.backends.sina.SinaWeiboBackend",
+    "sina_oauth2.backends.sina.SinaWeiboBackend",
 )
 #
 #The application will try to import custom backends from the sources defined in:
 #
-SOCIAL_AUTH_IMPORT_BACKENDS = (
-    "sina_oauth2.backends",
-)
+#SOCIAL_AUTH_IMPORT_BACKENDS = (
+#    "sina_oauth2.backends",
+#)
 #
 #This way it"s easier to add new providers, check the already defined ones in social_auth.backends for examples.
 #

@@ -55,7 +55,6 @@ class PasswordReset(models.Model):
             self.reset
             )
 
-
 @receiver(post_save, sender=User)
 def create_account(sender, instance=None, **kwargs):
     if instance is None:
