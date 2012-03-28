@@ -19,7 +19,7 @@
                 {% templatetag openvariable %}/each{% templatetag closevariable %}
             </td>
             <td><a class="owner" href="{% url api_bookmarks %}?owner_id=${owner.id}">${owner.username}</a></td>
-            <td>${humaneDate(Date(create_time))}--(${Date(create_time)})--${create_time}</td>
+            <td>${create_time.replace("T", " ").substr(0, 19)}</td>
         </tr>
     </script>
     <script type="text/javascript">
