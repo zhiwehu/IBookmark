@@ -39,26 +39,27 @@
          * @param {$} jq the container with the pagination links as a $ object
          */
         function init_pagination() {
-            api_url = update_parameter(api_url, "items_per_page", items_per_page);
+            api_url = update_parameter(api_url, "items_per_page", 1);
             //alert(api_url);
             $.ajax({
                 url:api_url,
                 success:function (data) {
-                    if (data.redirect) {
-                        window.location.href = json.redirect;
+                    if (data && data.redirect) {
+                        window.location.href = data.redirect;
                     }
                     if (data.total_count > 0) {
                         //alert("1");
                         $("#pagination_div").pagination(data.total_count, {
-                            items_per_page:data.items_per_page,
+                            items_per_page:items_per_page,
                             num_display_entries:2,
                             num_edge_entries:2,
                             prev_text:"&larr; Previous",
                             next_text:"Next &rarr;",
                             callback:pagination_callback
                         });
-
                     } else {
+                        $("#bookmarks_table tbody").empty();
+                        $("#bookmarks_table tbody").html('<tr><td colspan="5">{% trans "No Data" %}</td></tr>');
                         $("#pagination_div").empty();
                     }
                 },
@@ -67,57 +68,9 @@
         }
 
         function pagination_callback(page_index, jq) {
+            api_url = update_parameter(api_url, "items_per_page", items_per_page)
             api_url = update_parameter(api_url, "current_page", page_index + 1)
-            //alert("2");
             render_data();
-        }
-
-        function apply_form_field_error(fieldname, error) {
-            var input = $("#id_" + fieldname),
-                    container = input.parent("div").parent("div")
-            error_msg = $("<span />").addClass("help-inline ajax-error").text(error[0]);
-
-            container.addClass("error");
-            error_msg.insertAfter(input);
-        }
-
-        function clear_form_field_errors(form) {
-            $(".ajax-error", $(form)).remove();
-            $(".error", $(form)).removeClass("error");
-        }
-
-        function create_bookmark() {
-            send_dict = {
-                url: api_url,
-                type:"POST",
-                data:$("#bookmark_form").serialize(),
-                processData:false,
-                dataType:"json",
-                success:function (json, textStatus) {
-                    if (json.redirect) {
-                        window.location.href = json.redirect;
-                    } else {
-                        $("#bookmark_form_modal").modal("hide");
-                        $("#bookmark_form :input:not(:checkbox)").val("");
-                        // TODO
-                        // Render data to table
-                        init_pagination("{% url api_bookmarks %}");
-                    }
-                },
-                error:function (xmlHttpRequest, textStatus, errorThrown) {
-                    var errors = $.parseJSON(xmlHttpRequest.responseText);
-                    $.each(errors, function (index, value) {
-                        if (index === "__all__") {
-                            //
-                        } else {
-                            apply_form_field_error(index, value);
-                        }
-                    });
-                }
-            };
-
-            $.ajax(send_dict);
-            return false;
         }
 
         function render_data() {
@@ -125,25 +78,12 @@
                 url:api_url,
                 success:function (bookmarks) {
                     if (bookmarks.data.length > 0) {
-                        //alert("3");
                         $("#bookmarks_table tbody tr").remove();
                         $("#bookmarks_table tbody").empty();
                         $("#bookmark_row").tmpl(bookmarks.data).appendTo("#bookmarks_table tbody");
                     } else {
                         $("#bookmarks_table tbody").empty();
                     }
-                    /* Table initialisation
-                    $(".datatable").dataTable({
-                        "bPaginate":false,
-                        "bLengthChange":false,
-                        "bFilter":false,
-                        "bSort":true,
-                        "bInfo":false,
-                        "bAutoWidth":false,
-                        "bRetrieve": true,
-                        "aaSorting": [[4, "desc" ]]
-                    });
-                     */
                 },
                 dataType:"json"
             });
@@ -152,13 +92,6 @@
         $(function () {
             // init page data and render to page
             init_pagination();
-
-            // submit data to create bookmark
-            $("#bookmark_form").submit(function () {
-                clear_form_field_errors("#bookmark_form")
-                create_bookmark();
-                return false;
-            });
 
             // Search by tag
             $("body").delegate("a.tag", "click", function () {
@@ -193,13 +126,6 @@
 
 {% block body %}
     <p>
-        {% if request.user.is_authenticated %}
-            <a href="#bookmark_form_modal"
-               class="btn btn-success btn-large" data-toggle="modal">{% trans "Add bookmark" %}</a>
-        {% else %}
-            <a href="{% url acct_login %}?next={% url bookmark %}"
-               class="btn btn-success btn-large">{% trans "Add bookmark" %}</a>
-        {% endif %}
         <a id="reload_btn" class="btn btn-success btn-large">{% trans "Reload" %}</a>
     </p>
 
@@ -226,26 +152,6 @@
             </ul>
         </div>
         <div id="pagination_div" class="pagination pagination-right span6"></div>
-    </div>
-
-    <div id="bookmark_form_modal" class="modal hide fade">
-        <form id="bookmark_form" action="." method="post">
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal">&times;</a>
-
-                <h3>{% trans "Add bookmark" %}</h3>
-            </div>
-            <div id="bookmark_form_error"></div>
-            <div class="modal-body">
-                {% csrf_token %}
-                <fieldset>
-                    {{ form|as_bootstrap }}
-                </fieldset>
-            </div>
-            <div class="modal-footer">
-                <button id="btn_add_bookmark" class="btn large primary">{% trans "Submit" %}</button>
-            </div>
-        </form>
     </div>
 {% endblock %}
 

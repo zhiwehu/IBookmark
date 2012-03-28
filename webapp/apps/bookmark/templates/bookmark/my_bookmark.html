@@ -1,27 +1,321 @@
 {% extends "bookmark/base.html" %}
 
 {% load i18n %}
+{% load humanize %}
 {% load bootstrap_tags %}
 
+{% block extra_script %}
+    <script src="{{ STATIC_URL }}js/jquery.pagination.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tmpl.min.js"></script>
+    <script src="{{ STATIC_URL }}js/humane.js"></script>
+    <script id="bookmark_row" type="text/x-jquery-tmpl">
+        <tr>
+            <td><a href="${url}" target="_blank">${url}</a></td>
+            <td>${title}</td>
+            <td>
+                {% templatetag openvariable %}each(i, tag) tags{% templatetag closevariable %}
+                <a class="tag" href="{% url api_my_bookmarks %}?tag=${tag.name}"><span
+                        class="badge badge-info">${tag.name}</span></a>
+                {% templatetag openvariable %}/each{% templatetag closevariable %}
+            </td>
+            <td>${create_time.replace("T", " ").substr(0, 19)}</td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-primary btn-small update" href="/api/bookmarks/${id}/">{% trans "Edit" %}</a>
+                    <a class="btn btn-primary btn-small delete" href="/api/bookmarks/${id}/">{% trans "Delete" %}</a>
+                </div>
+            </td>
+        </tr>
+    </script>
+    <script type="text/javascript">
+        var items_per_page = "10";
+        var api_url = "{% url api_my_bookmarks %}"
+
+        function update_parameter(a, k, v) {
+            var re = new RegExp("([?|&])" + k + "=.*?(&|$)", "i"),
+                    separator = a.indexOf('?') !== -1 ? "&" : "?";
+
+            if (a.match(re)) return a.replace(re, '$1' + k + "=" + v + '$2');
+            else return a + separator + k + "=" + v;
+        }
+
+        /*
+         * @param {int}page_index New Page index
+         * @param {$} jq the container with the pagination links as a $ object
+         */
+        function init_pagination() {
+            api_url = update_parameter(api_url, "items_per_page", 1);
+            //alert(api_url);
+            $.ajax({
+                url:api_url,
+                success:function (data) {
+                    if (data && data.redirect) {
+                        window.location.href = data.redirect;
+                    }
+                    if (data.total_count > 0) {
+                        $("#pagination_div").pagination(data.total_count, {
+                            items_per_page:items_per_page,
+                            num_display_entries:2,
+                            num_edge_entries:2,
+                            prev_text:"&larr; Previous",
+                            next_text:"Next &rarr;",
+                            callback:pagination_callback
+                        });
+                    } else {
+                        $("#bookmarks_table tbody").empty();
+                        $("#bookmarks_table tbody").html('<tr><td colspan="5">{% trans "No Data" %}</td></tr>');
+                        $("#pagination_div").empty();
+                    }
+                },
+                dataType:"json"
+            });
+        }
+
+        function pagination_callback(page_index, jq) {
+            api_url = update_parameter(api_url, "items_per_page", items_per_page)
+            api_url = update_parameter(api_url, "current_page", page_index + 1)
+            render_data();
+        }
+
+        function apply_form_field_error(fieldname, error) {
+            var input = $("#id_" + fieldname),
+                    container = input.parent("div").parent("div")
+            error_msg = $("<span />").addClass("help-inline ajax-error").text(error[0]);
+
+            container.addClass("error");
+            error_msg.insertAfter(input);
+        }
+
+        function clear_form_field_errors(form) {
+            $(".ajax-error", $(form)).remove();
+            $(".error", $(form)).removeClass("error");
+        }
+
+        function create_or_update_bookmark(url) {
+            var http_method = "POST";
+            if ($("#add_edit").val() == "edit") {
+                http_method = "PUT";
+            } else if ($("#add_edit").val() == "add") {
+                http_method = "POST";
+            }
+            send_dict = {
+                url: url,
+                type:http_method,
+                data:$("#bookmark_form").serialize(),
+                processData:false,
+                dataType:"json",
+                success:function (data) {
+                    if (data && data.redirect) {
+                        window.location.href = data.redirect;
+                    } else {
+                        $("#bookmark_form_modal").modal("hide");
+                        // Render data to table
+                        init_pagination();
+                    }
+                },
+                error:function (xmlHttpRequest, textStatus, errorThrown) {
+                    var errors = $.parseJSON(xmlHttpRequest.responseText);
+                    $.each(errors, function (index, value) {
+                        if (index === "__all__") {
+                            //
+                        } else {
+                            apply_form_field_error(index, value);
+                        }
+                    });
+                }
+            };
+
+            $.ajax(send_dict);
+            return false;
+        }
+
+        function render_data() {
+            $.ajax({
+                url:api_url,
+                success:function (bookmarks) {
+                    if (bookmarks.data.length > 0) {
+                        $("#bookmarks_table tbody tr").remove();
+                        $("#bookmarks_table tbody").empty();
+                        $("#bookmark_row").tmpl(bookmarks.data).appendTo("#bookmarks_table tbody");
+                    } else {
+                        $("#bookmarks_table tbody").empty();
+                    }
+                    /* Table initialisation
+                     $(".datatable").dataTable({
+                     "bPaginate":false,
+                     "bLengthChange":false,
+                     "bFilter":false,
+                     "bSort":true,
+                     "bInfo":false,
+                     "bAutoWidth":false,
+                     "bRetrieve": true,
+                     "aaSorting": [[4, "desc" ]]
+                     });
+                     */
+                },
+                dataType:"json"
+            });
+        }
+
+        function update_bookmark(url) {
+            // Get the bookmark first
+            $.ajax({
+                url:url,
+                success:function (bookmark) {
+                    if (bookmark) {
+                        $("#add_edit").val("edit");
+                        $("#api_url").val("/api/bookmarks/" + bookmark.id + "/");
+                        $("#id_url").val(bookmark.url);
+                        $("#id_title").val(bookmark.title);
+                        var tags = "";
+                        $.each(bookmark.tags, function(i, tag) {
+                            tags = tags + ", " + tag.name;
+                        });
+                        tags = tags.substr(2, tags.length);
+                        $("#id_tags").val(tags);
+                        $("#id_public").val(bookmark.public);
+
+                        $("#bookmark_form_modal").modal("show");
+                    } else {
+                        alert("{% trans 'The data is not exists, please reload.' %}");
+                    }
+                },
+                dataType:"json"
+            });
+        }
+
+        function delete_bookmark(url) {
+            if (confirm("{% trans 'Are you sure?' %}")) {
+                var dict = {
+                    url:url,
+                    type:"DELETE",
+                    dataType:"json",
+                    success:function (data, textStatus) {
+                        if (data && data.redirect) {
+                            window.location.href = data.redirect;
+                        }
+                        init_pagination();
+                    },
+                    error:function (xmlHttpRequest, textStatus, errorThrown) {
+                        alert(xmlHttpRequest.responseText);
+                    }
+                };
+                $.ajax(dict);
+            }
+        }
+
+        $(function () {
+            // init page data and render to page
+            init_pagination();
+
+            $("#add_bookmark_btn").click(function() {
+                $("#add_edit").val("add");
+                $("#api_url").val("{% url api_bookmarks %}");
+                $("#id_url").val("");
+                $("#id_title").val("");
+                $("#id_tags").val("");
+                $("#id_public").val(true);
+                $("#bookmark_form_modal").modal("show");
+            });
+
+            // submit data to create bookmark
+            $("#bookmark_form").submit(function () {
+                clear_form_field_errors("#bookmark_form")
+                create_or_update_bookmark($("#api_url").val());
+                return false;
+            });
+
+            // Search by tag
+            $("body").delegate("a.tag", "click", function () {
+                api_url = $(this).attr("href");
+                init_pagination();
+                return false;
+            });
+
+            // Update a bookmark
+            $("body").delegate("a.update", "click", function () {
+                update_bookmark($(this).attr("href"));
+                return false;
+            });
+
+            // Delete a bookmark
+            $("body").delegate("a.delete", "click", function () {
+                delete_bookmark($(this).attr("href"));
+                return false;
+            });
+
+            // Refrush data
+            $("#reload_btn").click(function () {
+                api_url = "{% url api_my_bookmarks %}";
+                init_pagination();
+            })
+
+            // Change the items_per_page(10, 30, 50)
+            $("ul.per_page_number > li").click(function() {
+                $("ul.per_page_number > li").removeClass("active");
+                $(this).toggleClass("active");
+                items_per_page = $(this).attr("id");
+                init_pagination();
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
-    <div id="bookmark_form_model" class="modal hide fade">
-        <form id="form_bookmark" action="." method="post">
+    <p>
+        {% if request.user.is_authenticated %}
+            <a href="#" id="add_bookmark_btn" class="btn btn-success btn-large">{% trans "Add bookmark" %}</a>
+        {% else %}
+            <a href="{% url acct_login %}?next={% url bookmark %}"
+               class="btn btn-success btn-large">{% trans "Add bookmark" %}</a>
+        {% endif %}
+        <a id="reload_btn" class="btn btn-success btn-large">{% trans "Reload" %}</a>
+    </p>
+
+    <table id="bookmarks_table" class="table table-striped table-bordered datatable">
+        <thead>
+        <tr>
+            <th>{% trans "URL" %}</th>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "Tags" %}</th>
+            <th>{% trans "Created time" %}</th>
+            <th>{% trans "Action" %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div id="per_page_number_div" class="pagination span4">
+            <ul class="per_page_number">
+                <li id="10" class="active"><a href="#">10</a></li>
+                <li id="30"><a href="#">30</a></li>
+                <li id="50"><a href="#">50</a></li>
+            </ul>
+        </div>
+        <div id="pagination_div" class="pagination pagination-right span6"></div>
+    </div>
+
+    <div id="bookmark_form_modal" class="modal hide fade">
+        <form id="bookmark_form" action="." method="post">
             <div class="modal-header">
-                <a href="#" class="close">&times;</a>
+                <a class="close" data-dismiss="modal">&times;</a>
+
                 <h3>{% trans "Add bookmark" %}</h3>
             </div>
-            <div id="bookmark-error"></div>
+            <div id="bookmark_form_error"></div>
             <div class="modal-body">
+                <input id="add_edit" type="hidden" value="add" />
+                <input id="api_url" type="hidden" value="{% url api_bookmarks %}" />
                 {% csrf_token %}
                 <fieldset>
                     {{ form|as_bootstrap }}
                 </fieldset>
             </div>
             <div class="modal-footer">
-                <button id="btn_add_bookmark" class="btn large primary">{% trans "Submit" %}
-                </button>
+                <button id="btn_add_bookmark" class="btn large primary">{% trans "Submit" %}</button>
             </div>
         </form>
     </div>
 {% endblock %}
-

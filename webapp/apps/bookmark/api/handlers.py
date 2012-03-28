@@ -86,7 +86,7 @@ class BookmarkHandler(BaseHandler):
             bookmark = Bookmark.objects.get(pk = int(bookmark_id), owner=request.user)
             form = BookmarkForm(request.PUT, instance=bookmark)
             form.save()
-            return rc.ALL_OK
+            return bookmark
         except ObjectDoesNotExist:
             return rc.NOT_FOUND
 
@@ -143,7 +143,7 @@ def get_data(bookmarks, request):
 
     # Get items_per_page
     items_per_page = int(request.GET.get('items_per_page', 10))
-    if items_per_page not in [10, 30, 50]:
+    if items_per_page not in [1, 10, 30, 50]:
         items_per_page = 10
 
     # Get current_page
