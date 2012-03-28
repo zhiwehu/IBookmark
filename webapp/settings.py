@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -222,6 +223,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'your mail here'
 EMAIL_HOST_PASSWORD = 'xxxxxx'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+DATETIME_FORMAT = 'Y-m-d H:i:s'
 
 try:
     from local_settings import *
