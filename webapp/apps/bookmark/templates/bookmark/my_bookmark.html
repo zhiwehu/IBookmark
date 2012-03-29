@@ -8,6 +8,7 @@
     <script src="{{ STATIC_URL }}js/jquery.pagination.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.tmpl.min.js"></script>
     <script src="{{ STATIC_URL }}js/humane.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tagsinput.min.js"></script>
     <script id="bookmark_row" type="text/x-jquery-tmpl">
         <tr>
             <td><a href="${url}" target="_blank">${url}</a></td>
@@ -184,9 +185,11 @@
                             tags = tags + ", " + tag.name;
                         });
                         tags = tags.substr(2, tags.length);
-                        $("#id_tags").val(tags);
+                        //$("#id_tags").val(tags);
+                        // Use tagInput
+                        $("#id_tags").importTags('');
+                        $("#id_tags").importTags(tags);
                         $("#id_public").val(bookmark.public);
-
                         $("#bookmark_form_modal").modal("show");
                     } else {
                         alert("{% trans 'The data is not exists, please reload.' %}");
@@ -222,12 +225,32 @@
             // init page data and render to page
             init_pagination();
 
+            // Init tag input
+            $("#id_tags").tagsInput({
+                //'autocomplete_url': url_to_autocomplete_api,
+                //'autocomplete': { option: value, option: value},
+                'height':'50px',
+                //'width':'300px',
+                'interactive':true,
+                'defaultText':'',
+                //'onAddTag':callback_function,
+                //'onRemoveTag':callback_function,
+                //'onChange' : callback_function,
+                'removeWithBackspace' : true,
+                'minChars' : 0,
+                'maxChars' : 0, //if not provided there is no limit,
+                'placeholderColor' : '#666666'
+            });
+
+            // Add bookmark
             $("#add_bookmark_btn").click(function() {
                 $("#add_edit").val("add");
                 $("#api_url").val("{% url api_bookmarks %}");
                 $("#id_url").val("");
                 $("#id_title").val("");
-                $("#id_tags").val("");
+                //$("#id_tags").val("");
+                // Use tagInput
+                $("#id_tags").importTags('');
                 $("#id_public").val(true);
                 $("#bookmark_form_modal").modal("show");
             });

@@ -2,6 +2,11 @@
 
 {% load i18n %}
 
+{% block extra_style %}
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/jquery.tagsinput.css" rel="stylesheet">
+{% endblock %}
+
 {% block body_base %}
     <div class="container">
         {% include "_messages.html" %}
