@@ -11,9 +11,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'webapp.views.home', name='home'),
     # url(r'^webapp/', include('webapp.foo.urls')),
-    url(r'^$', direct_to_template, {
-        'template': 'homepage.html',
-        }, name='home'),
+    url(r'^$', 'bookmark.views.bookmark', name='home'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

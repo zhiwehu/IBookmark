@@ -57,6 +57,7 @@ class BookmarkHandler(BaseHandler):
         Return a bookmark if 'bookmark_id' is given,
         otherwise a subset.
         """
+        # bookmarks = all public + owner
         bookmarks = Bookmark.objects.filter(Q(public = True) | Q(owner = request.user))
 
         if bookmark_id:

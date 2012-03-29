@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<ul class="nav nav-pills">
+    <li {% if active == "bookmarks" %}class="active"{% endif %}>
+        <a href="{% url bookmark %}">
+            <i class="icon-bookmark icon-white"></i>&nbsp;{% trans "Bookmarks" %}
+        </a>
+    </li>
+    {% if request.user.is_authenticated %}
+    <li {% if active == "my_bookmarks" %}class="active"{% endif %}>
+        <a href="{% url my_bookmark %}">
+            <i class="icon-user icon-white"></i>&nbsp;{% trans "My Bookmarks" %}
+        </a>
+    </li>
+    {% endif %}
+
+</ul>
