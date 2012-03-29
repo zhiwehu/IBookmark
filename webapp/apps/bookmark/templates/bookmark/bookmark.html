@@ -43,6 +43,7 @@
             //alert(api_url);
             $.ajax({
                 url:api_url,
+                cache: false,
                 success:function (data) {
                     if (data && data.redirect) {
                         window.location.href = data.redirect;
@@ -76,6 +77,7 @@
         function render_data() {
             $.ajax({
                 url:api_url,
+                cache: false,
                 success:function (bookmarks) {
                     if (bookmarks.data.length > 0) {
                         $("#bookmarks_table tbody tr").remove();

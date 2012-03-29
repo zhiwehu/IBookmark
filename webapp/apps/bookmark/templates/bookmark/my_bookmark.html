@@ -45,9 +45,10 @@
          */
         function init_pagination() {
             api_url = update_parameter(api_url, "items_per_page", 1);
-            //alert(api_url);
             $.ajax({
                 url:api_url,
+                dataType:"json",
+                cache: false,
                 success:function (data) {
                     if (data && data.redirect) {
                         window.location.href = data.redirect;
@@ -67,7 +68,9 @@
                         $("#pagination_div").empty();
                     }
                 },
-                dataType:"json"
+                error:function (xmlHttpRequest, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
             });
         }
 
@@ -104,6 +107,7 @@
                 data:$("#bookmark_form").serialize(),
                 processData:false,
                 dataType:"json",
+                cache: false,
                 success:function (data) {
                     if (data && data.redirect) {
                         window.location.href = data.redirect;
@@ -153,7 +157,8 @@
                      });
                      */
                 },
-                dataType:"json"
+                dataType:"json",
+                cache: false
             });
         }
 
@@ -180,6 +185,7 @@
                         alert("{% trans 'The data is not exists, please reload.' %}");
                     }
                 },
+                cache: false,
                 dataType:"json"
             });
         }
@@ -190,6 +196,7 @@
                     url:url,
                     type:"DELETE",
                     dataType:"json",
+                    cache: false,
                     success:function (data, textStatus) {
                         if (data && data.redirect) {
                             window.location.href = data.redirect;
@@ -314,7 +321,7 @@
                 </fieldset>
             </div>
             <div class="modal-footer">
-                <button id="btn_add_bookmark" class="btn large primary">{% trans "Submit" %}</button>
+                <button id="btn_add_bookmark" class="btn btn-large btn-primary">{% trans "Submit" %}</button>
             </div>
         </form>
     </div>
