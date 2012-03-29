@@ -1,3 +1,6 @@
+a.tag {
+    line-height: 20px;
+}
 a.tag:hover {
     text-decoration: none;
 }

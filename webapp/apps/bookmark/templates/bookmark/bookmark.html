@@ -7,7 +7,6 @@
 {% block extra_script %}
     <script src="{{ STATIC_URL }}js/jquery.pagination.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.tmpl.min.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery.tagsinput.min.js"></script>
     <script id="bookmark_row" type="text/x-jquery-tmpl">
         <tr>
             <td><a href="${url}" target="_blank">${url}</a></td>
@@ -15,7 +14,7 @@
             <td>
                 {% templatetag openvariable %}each(i, tag) tags{% templatetag closevariable %}
                 <a class="tag" href="{% url api_bookmarks %}?tag=${tag.name}"><span
-                        class="badge badge-info">${tag.name}</span></a>
+                        class="label label-info">${tag.name}</span></a>
                 {% templatetag openvariable %}/each{% templatetag closevariable %}
             </td>
             <td><a class="owner" href="{% url api_bookmarks %}?owner_id=${owner.id}">${owner.username}</a></td>
@@ -95,28 +94,10 @@
             // init page data and render to page
             init_pagination();
 
-            // Init tag input
-            $("#tags_filter").tagsInput({
-                //'autocomplete_url': url_to_autocomplete_api,
-                //'autocomplete': { option: value, option: value},
-                'height':'30px',
-                //'width':'300px',
-                'interactive':false,
-                'defaultText':'',
-                //'onAddTag':callback_function,
-                //'onRemoveTag':callback_function,
-                //'onChange' : callback_function,
-                'removeWithBackspace' : false,
-                'minChars' : 0,
-                'maxChars' : 0, //if not provided there is no limit,
-                'placeholderColor' : '#666666'
-            });
-
             // Search by tag
             $("body").delegate("a.tag", "click", function () {
                 api_url = $(this).attr("href");
-                //$("#data_title").html('{% trans "Bookmarks tagged by" %} ' + $(this).html());
-                $("tags_filter").addTag("tag");
+                $("#data_title").html('{% trans "Bookmarks tagged by" %} ' + $(this).html());
                 init_pagination();
                 return false;
             });
@@ -143,7 +124,6 @@
 {% block body %}
     <h3 id="data_title">
         {% trans "All public bookmarks" %}
-        <input id="tags_filter" type="text" >
     </h3>
 
     <table id="bookmarks_table" class="table table-striped table-bordered datatable">

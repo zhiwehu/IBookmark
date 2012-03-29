@@ -7,3 +7,7 @@ django-social-auth
 django-taggit
 pil
 django-piston
+django-templatetag-sugar
+#On windows, please install django-taggit-templatetags manually.
+django-taggit-templatetags
+django-csv-importer
