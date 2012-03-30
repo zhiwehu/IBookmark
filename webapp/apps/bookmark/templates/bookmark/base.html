@@ -1,7 +1,6 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-{% load taggit_extras %}
 
 {% block extra_style %}
     <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
@@ -21,6 +20,7 @@
                 {% block subnav %}
                     <div class="alert alert-info">
                         <h3>{% trans "Tags" %}</h3>
+                        {% comment %}
                         <p>
                             {% get_taglist as tags for 'bookmark.Bookmark' %}
                             {% for tag in tags %}
@@ -29,6 +29,7 @@
                                 </a>
                             {% endfor %}
                         </p>
+                        {% endcomment %}
                     </div>
                 {% endblock %}
             </div>

@@ -1,4 +1,4 @@
-django==1.3.1
+django
 django-email-confirmation
 django-timezones
 pytz
@@ -7,7 +7,4 @@ django-social-auth
 django-taggit
 pil
 django-piston
-django-templatetag-sugar
-#On windows, please install django-taggit-templatetags manually.
-django-taggit-templatetags
 django-csv-importer

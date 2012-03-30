@@ -141,7 +141,6 @@ INSTALLED_APPS = (
     'emailconfirmation',
     'social_auth',
     'taggit',
-    'taggit_templatetags',
 
     # theme
     'theme',

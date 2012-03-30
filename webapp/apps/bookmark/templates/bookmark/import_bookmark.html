@@ -1,0 +1,26 @@
+{% extends "bookmark/base.html" %}
+
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block body %}
+    <form id="import_file_form" action="{% url import_bookmark %}" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>{% trans "Import bookmarks" %}</legend>
+            <div class="alert alert-block alert-info">
+                <h4 class="alert-heading">Important!</h4>
+                <ul>
+                    <li>The import file should be a .csv file and max length is 1MB.</li>
+                    <li>Please make sure your row data format is:</li>
+                    <b>url;title;tag1,tag2,tag3...</b> for example:<br/>
+                    <b>www.google.com;google;google,search</b>
+                </ul>
+            </div>
+            {% csrf_token %}
+            {{ file_form|as_bootstrap }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">{% trans "Import" %}</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

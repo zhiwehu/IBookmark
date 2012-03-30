@@ -1,13 +1,11 @@
 {% extends "bookmark/base.html" %}
 
 {% load i18n %}
-{% load humanize %}
 {% load bootstrap_tags %}
 
 {% block extra_script %}
     <script src="{{ STATIC_URL }}js/jquery.pagination.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.tmpl.min.js"></script>
-    <script src="{{ STATIC_URL }}js/humane.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.tagsinput.min.js"></script>
     <script id="bookmark_row" type="text/x-jquery-tmpl">
         <tr>
@@ -255,11 +253,6 @@
             $("#bookmark_form_modal").modal("show");
         });
 
-        // Import bookmarks
-        $("#import_btn").click(function() {
-            $("#import_file_form_modal").modal("show");
-        });
-
         // Delete all bookmarks
         $("#delete_all_bookmarks").click(function() {
             if (confirm("{% trans 'Are you sure?' %}")) {
@@ -294,13 +287,6 @@
             return false;
         });
 
-        // Refrush data
-        $("#reload_btn").click(function () {
-            api_url = "{% url api_my_bookmarks %}";
-            $("#tag-filter").html('');
-            init_pagination();
-        })
-
         // Change the items_per_page(10, 30, 50)
         $("ul.per_page_number > li").click(function () {
             $("ul.per_page_number > li").removeClass("active");
@@ -319,11 +305,7 @@
                 <i class="icon-plus icon-white"></i>
                 {% trans "Add bookmark" %}
             </a>
-            <a id="reload_btn" class="btn btn-info">
-                <i class="icon-refresh icon-white"></i>
-                {% trans "Reload" %}
-            </a>
-            <a id="import_btn" class="btn btn-info">
+            <a id="import_btn" class="btn btn-info" href="{% url import_bookmark %}">
                 <i class="icon-indent-right icon-white"></i>
                 {% trans "Import" %}
             </a>
@@ -383,25 +365,6 @@
             </div>
             <div class="modal-footer">
                 <button id="btn_add_bookmark" class="btn btn-large btn-primary">{% trans "Submit" %}</button>
-            </div>
-        </form>
-    </div>
-
-    <div id="import_file_form_modal" class="modal hide fade">
-        <form id="import_file_form" action="{% url import_bookmarks %}" method="post" enctype="multipart/form-data">
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal">&times;</a>
-
-                <h3>{% trans "Import bookmarks" %}</h3>
-            </div>
-            <div class="modal-body">
-                {% csrf_token %}
-                <fieldset>
-                    {{ file_form|as_bootstrap }}
-                </fieldset>
-            </div>
-            <div class="modal-footer">
-                <button id="btn_import_bookmarks" class="btn btn-large btn-primary">{% trans "Import" %}</button>
             </div>
         </form>
     </div>
