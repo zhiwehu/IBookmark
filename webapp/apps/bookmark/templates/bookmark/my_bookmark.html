@@ -13,7 +13,7 @@
             <td>${title}</td>
             <td>
                 {% templatetag openvariable %}each(i, tag) tags{% templatetag closevariable %}
-                <a class="tag" href="{% url api_my_bookmarks %}?tag=${tag.name}"><span
+                <a class="tag" href="{% url api_my_bookmarks %}?tag=${tag.id}"><span
                         class="label label-info">${tag.name}</span></a>
                 {% templatetag openvariable %}/each{% templatetag closevariable %}
             </td>
@@ -305,7 +305,7 @@
                 <i class="icon-plus icon-white"></i>
                 {% trans "Add bookmark" %}
             </a>
-            <a id="import_btn" class="btn btn-info" href="{% url import_bookmark %}">
+            <a id="import_btn" class="btn btn-info" href="{% url import_firefox_bookmark %}">
                 <i class="icon-indent-right icon-white"></i>
                 {% trans "Import" %}
             </a>

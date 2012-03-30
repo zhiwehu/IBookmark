@@ -21,16 +21,16 @@ class BookmarkForm(ModelForm):
         exclude = ('owner', 'create_time', 'screen_shot', 'last_modified_time')
 
 class FileForm(Form):
-    file  = forms.FileField()
+    file  = forms.FileField('Bookmark file', help_text=u'(Maximum file size of 1 MB)')
 
     def clean_file(self):
         data = self.cleaned_data["file"]
         if data:
             (root, ext) = os.path.splitext(data.name.lower())
-            if ext not in ['.csv']:
+            if ext not in ['.html']:
                 raise forms.ValidationError(
                     _(u"%(ext)s is an invalid file extension. Authorized extensions are : %(valid_exts_list)s") %
-                    { "ext" : ext, "valid_exts_list" : ", ".join([',csv']) })
+                    { "ext" : ext, "valid_exts_list" : ", ".join(['.html']) })
 
             if data.size > 1*1024*1024:
                 raise forms.ValidationError(

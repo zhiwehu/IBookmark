@@ -45,7 +45,7 @@ class BookmarkHandler(BaseHandler):
               ('owner', ('id', 'username',)),
               'title',
               'url',
-              ('tags', ('name',)),
+              ('tags', ('id', 'name',)),
               'public',
               'screen_shot',
               'create_time',
@@ -120,10 +120,10 @@ class AnonymousBookmarkHandler(BookmarkHandler, AnonymousBaseHandler):
 
 def get_data(bookmarks, request):
     # Get tag
-    tag_name = request.GET.get('tag')
-    if tag_name:
+    tag_id = int(request.GET.get('tag', 0))
+    if tag_id:
         try:
-            tag = Tag.objects.get(name=tag_name)
+            tag = Tag.objects.get(pk=tag_id)
             bookmarks = bookmarks.filter(tags__name__in=[tag.name])
         except ObjectDoesNotExist:
             # The tag does not exist, return none

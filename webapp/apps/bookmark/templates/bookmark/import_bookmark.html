@@ -4,17 +4,15 @@
 {% load bootstrap_tags %}
 
 {% block body %}
-    <form id="import_file_form" action="{% url import_bookmark %}" method="post" enctype="multipart/form-data">
+    <form id="import_file_form" action="{% url import_firefox_bookmark %}" method="post" enctype="multipart/form-data">
         <fieldset>
-            <legend>{% trans "Import bookmarks" %}</legend>
+            <legend>{% trans "Import bookmarks from csv file" %}</legend>
             <div class="alert alert-block alert-info">
-                <h4 class="alert-heading">Important!</h4>
-                <ul>
-                    <li>The import file should be a .csv file and max length is 1MB.</li>
-                    <li>Please make sure your row data format is:</li>
-                    <b>url;title;tag1,tag2,tag3...</b> for example:<br/>
-                    <b>www.google.com;google;google,search</b>
-                </ul>
+                <h4 class="alert-heading">How to do?</h4>
+                <ol>
+                    <li>Save your browser bookmarks to a file. Use your browser's export bookmarks option, and save the file on your desktop.</li>
+                    <li>Find bookmark file and add tags. Use the box below to locate your freshly exported bookmark file.</li>
+                </ol>
             </div>
             {% csrf_token %}
             {{ file_form|as_bootstrap }}

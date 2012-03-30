@@ -7,4 +7,3 @@ django-social-auth
 django-taggit
 pil
 django-piston
-django-csv-importer

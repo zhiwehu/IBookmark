@@ -1,5 +1,3 @@
-from csvImporter.fields import CharField
-from csvImporter.model import CsvModel
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save, post_delete
@@ -24,16 +22,6 @@ class Bookmark(models.Model):
 
     class Meta:
         ordering = ['-create_time']
-
-class BookmarkCsvModel(CsvModel):
-    url = CharField()
-    title = CharField()
-    tags = CharField()
-    class Meta:
-        has_header = False
-        silent_failure = True
-        delimiter = ";"
-
 
 class BookmarkUrl(models.Model):
     url = models.URLField(verbose_name=_(u'URL'), unique=True)
