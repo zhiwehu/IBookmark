@@ -1,11 +1,16 @@
+import json
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.core.urlresolvers import reverse
+from django.db.models.aggregates import Count
 from django.forms.forms import NON_FIELD_ERRORS
 from django.forms.util import ErrorList
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
+from django.utils import simplejson
 from forms import BookmarkForm, FileForm
+from taggit.models import TaggedItem, Tag
 from taggit.utils import parse_tags
 from models import Bookmark
 from utils import parse_firefox_bookmark
@@ -74,3 +79,27 @@ def import_firefox_bookmark(request, template_name='bookmark/import_bookmark.htm
         'file_form': file_form,
         'active': 'my_bookmark'
     }))
+
+@login_required()
+def my_tag(request):
+    tags = Tag.objects.filter(bookmark__owner=request.user)\
+    .annotate(bookmark_count=Count('bookmark'))\
+    .order_by('-bookmark_count')
+    total_count=tags.count()
+    tags_data=[]
+    for tag in tags:
+        tags_data.append({'id': tag.id, 'name': tag.name, 'bookmark_count': tag.bookmark_count})
+    data = {'data': tags_data, 'total_count': total_count}
+    return HttpResponse(json.dumps(data), mimetype="application/json")
+
+def tag(request):
+    tags = Tag.objects.filter(bookmark__public=True)\
+    .annotate(bookmark_count=Count('bookmark'))\
+    .order_by('-bookmark_count')[0:10]
+
+    total_count=tags.count()
+    tags_data=[]
+    for tag in tags:
+        tags_data.append({'id': tag.id, 'name': tag.name, 'bookmark_count': tag.bookmark_count})
+    data = {'data': tags_data, 'total_count': total_count}
+    return HttpResponse(json.dumps(data), mimetype="application/json")

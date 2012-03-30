@@ -33,6 +33,11 @@
             </td>
         </tr>
     </script>
+    <script id="tag_row" type="text/x-jquery-tmpl">
+        <a class="tag" href="{% url api_bookmarks %}?tag=${id}">
+            <span class="label label-info">${name} x ${bookmark_count}</span>
+        </a>
+    </script>
     <script type="text/javascript">
     var items_per_page = "10";
     var api_url = "{% url api_my_bookmarks %}"
@@ -219,9 +224,27 @@
         }
     }
 
+    function render_tag() {
+        $.ajax({
+            url:"{% url my_tag %}",
+            cache: false,
+            success:function (tags) {
+                if (tags.total_count > 0) {
+                    $("#my_tags").empty();
+                    $("#tag_row").tmpl(tags.data).appendTo("#my_tags");
+                } else {
+                    $("#my_tags").empty();
+                }
+            },
+            dataType:"json"
+        });
+    }
+
     $(function () {
         // init page data and render to page
         init_pagination();
+
+        render_tag();
 
         // Init tag input
         $("#id_tags").tagsInput({
@@ -367,5 +390,15 @@
                 <button id="btn_add_bookmark" class="btn btn-large btn-primary">{% trans "Submit" %}</button>
             </div>
         </form>
+    </div>
+{% endblock %}
+
+{% block subnav %}
+    <div class="alert alert-info">
+        <h3>{% trans "My tags" %}</h3>
+        <div id="my_tags">
+
+        </div>
+        <div></div>
     </div>
 {% endblock %}

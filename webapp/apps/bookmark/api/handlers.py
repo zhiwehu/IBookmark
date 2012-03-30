@@ -21,13 +21,54 @@ from taggit.models import Tag
 from bookmark.forms import BookmarkForm
 from bookmark.models import Bookmark
 
+def get_data(bookmarks, request):
+    # Get tag
+    tag_id = int(request.GET.get('tag', 0))
+    if tag_id:
+        try:
+            tag = Tag.objects.get(pk=tag_id)
+            bookmarks = bookmarks.filter(tags__name__in=[tag.name])
+        except ObjectDoesNotExist:
+            # The tag does not exist, return none
+            bookmarks = bookmarks.none()
+
+    # Get owner
+    owner_id = int(request.GET.get('owner_id', 0))
+    if owner_id > 0:
+        try:
+            owner = User.objects.get(id=owner_id)
+            bookmarks = bookmarks.filter(owner=owner)
+        except ObjectDoesNotExist:
+            # The tag does not exist, return none
+            bookmarks = bookmarks.none()
+
+    # Get total records.
+    total_count = bookmarks.count()
+
+    # Get items_per_page
+    items_per_page = int(request.GET.get('items_per_page', 10))
+    if items_per_page not in [1, 10, 30, 50]:
+        items_per_page = 10
+
+    # Get current_page
+    current_page = int(request.GET.get('current_page', 1))
+    if current_page <= 0:
+        current_page = 1
+    page_number = total_count / items_per_page + 1
+    if current_page > page_number:
+        current_page = page_number
+    bookmarks = bookmarks[(current_page - 1) * items_per_page: current_page * items_per_page]
+    data = {'data': bookmarks, 'total_count': total_count, 'current_page': current_page,
+            'items_per_page': items_per_page}
+    return data
+
 class MyBookmarkHandler(BaseHandler):
     model = Bookmark
     fields = ('id',
               ('owner', ('id', 'username',)),
               'title',
               'url',
-              ('tags', ('name',)),
+              ('tags', ('id', 'name',)),
               'public',
               'screen_shot',
               'create_time',
@@ -117,44 +158,3 @@ class AnonymousBookmarkHandler(BookmarkHandler, AnonymousBaseHandler):
                 return rc.NOT_FOUND
         else:
             return get_data(bookmarks, request)
-
-def get_data(bookmarks, request):
-    # Get tag
-    tag_id = int(request.GET.get('tag', 0))
-    if tag_id:
-        try:
-            tag = Tag.objects.get(pk=tag_id)
-            bookmarks = bookmarks.filter(tags__name__in=[tag.name])
-        except ObjectDoesNotExist:
-            # The tag does not exist, return none
-            bookmarks = bookmarks.none()
-
-    # Get owner
-    owner_id = int(request.GET.get('owner_id', 0))
-    if owner_id > 0:
-        try:
-            owner = User.objects.get(id=owner_id)
-            bookmarks = bookmarks.filter(owner=owner)
-        except ObjectDoesNotExist:
-            # The tag does not exist, return none
-            bookmarks = bookmarks.none()
-
-    # Get total records.
-    total_count = bookmarks.count()
-
-    # Get items_per_page
-    items_per_page = int(request.GET.get('items_per_page', 10))
-    if items_per_page not in [1, 10, 30, 50]:
-        items_per_page = 10
-
-    # Get current_page
-    current_page = int(request.GET.get('current_page', 1))
-    if current_page <= 0:
-        current_page = 1
-    page_number = total_count / items_per_page + 1
-    if current_page > page_number:
-        current_page = page_number
-    bookmarks = bookmarks[(current_page - 1) * items_per_page: current_page * items_per_page]
-    data = {'data': bookmarks, 'total_count': total_count, 'current_page': current_page,
-            'items_per_page': items_per_page}
-    return data

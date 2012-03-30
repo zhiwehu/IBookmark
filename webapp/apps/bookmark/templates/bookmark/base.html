@@ -19,19 +19,7 @@
             </div>
             <div class="span2 columns">
                 {% block subnav %}
-                    <div class="alert alert-info">
-                        <h3>{% trans "Tags" %}</h3>
-                        {% comment %}
-                        <p>
-                            {% get_taglist as tags for 'bookmark.Bookmark' %}
-                            {% for tag in tags %}
-                                <a class="tag" href="{% url api_bookmarks %}?tag={{ tag }}">
-                                    <span class="label label-info">{{ tag }}</span>
-                                </a>
-                            {% endfor %}
-                        </p>
-                        {% endcomment %}
-                    </div>
+
                 {% endblock %}
             </div>
         </div>
