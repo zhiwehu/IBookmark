@@ -3,6 +3,10 @@
 {% load i18n %}
 {% load bootstrap_tags %}
 
+{% block head_title %}
+    {% trans "Import" %}
+{% endblock %}
+
 {% block body %}
     <form id="import_file_form" action="{% url import_firefox_bookmark %}" method="post" enctype="multipart/form-data">
         <fieldset>

@@ -3,6 +3,10 @@
 {% load i18n %}
 {% load bootstrap_tags %}
 
+{% block head_title %}
+    {% trans "Home" %}
+{% endblock %}
+
 {% block extra_script %}
     <script src="{{ STATIC_URL }}js/jquery.pagination.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.tmpl.min.js"></script>

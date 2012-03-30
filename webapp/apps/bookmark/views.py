@@ -1,6 +1,5 @@
 import json
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
 from django.core.urlresolvers import reverse
 from django.db.models.aggregates import Count
 from django.forms.forms import NON_FIELD_ERRORS
@@ -8,9 +7,8 @@ from django.forms.util import ErrorList
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from django.utils import simplejson
 from forms import BookmarkForm, FileForm
-from taggit.models import TaggedItem, Tag
+from taggit.models import Tag
 from taggit.utils import parse_tags
 from models import Bookmark
 from utils import parse_firefox_bookmark
