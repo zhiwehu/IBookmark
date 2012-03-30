@@ -22,3 +22,14 @@
         </fieldset>
     </form>
 {% endblock %}
+
+{% block extra_script %}
+    <script src="{{ STATIC_URL }}js/jquery.loadmask.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#import_file_form").submit(function() {
+            $("body").mask("{% trans 'Importing...' %}");
+        });
+    })
+    </script>
+{% endblock %}
