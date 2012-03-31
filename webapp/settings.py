@@ -10,6 +10,7 @@ SERVE_MEDIA = DEBUG
 
 ADMINS = (
 # ('Your Name', 'your_email@example.com'),
+    ('Jeffrey', 'golettoo@gmail.com'),
 )
 
 MANAGERS = ADMINS
