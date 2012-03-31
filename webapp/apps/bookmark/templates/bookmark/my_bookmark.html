@@ -86,7 +86,7 @@
                     });
                 } else {
                     $("#bookmarks_table tbody").empty();
-                    $("#bookmarks_table tbody").html('<tr><td colspan="5">{% trans "No Data" %}</td></tr>');
+                    $("#bookmarks_table tbody").html('<tr><td colspan="6">{% trans "No Data" %}</td></tr>');
                     $("#pagination_div").empty();
                 }
             },
@@ -353,11 +353,11 @@
         <i class="icon-plus icon-white"></i>
         {% trans "Add bookmark" %}
     </a>
-        <a id="import_btn" class="btn btn-info" href="{% url import_firefox_bookmark %}">
+        <a id="import_btn" class="btn btn-info" href="{% url import_bookmark %}">
             <i class="icon-indent-right icon-white"></i>
             {% trans "Import" %}
         </a>
-        <a id="export_btn" class="btn btn-info">
+        <a id="export_btn" class="btn btn-info" href="{% url export_bookmark %}">
             <i class="icon-indent-left icon-white"></i>
             {% trans "Export" %}
         </a>

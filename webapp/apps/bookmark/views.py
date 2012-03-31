@@ -7,6 +7,7 @@ from django.forms.util import ErrorList
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
+from django.template.loader import render_to_string
 from forms import BookmarkForm, FileForm
 from taggit.models import Tag
 from taggit.utils import parse_tags
@@ -58,7 +59,7 @@ def import_bookmark(request, template_name='bookmark/import_bookmark.html'):
 '''
 
 @login_required()
-def import_firefox_bookmark(request, template_name='bookmark/import_bookmark.html'):
+def import_bookmark(request, template_name='bookmark/import_bookmark.html'):
     file_form = FileForm(request.POST or None, request.FILES or None)
     if request.method == 'POST' and file_form.is_valid():
         file = request.FILES['file']
@@ -104,3 +105,13 @@ def tag(request):
         tags_data.append({'id': tag.id, 'name': tag.name, 'bookmark_count': tag.bookmark_count})
     data = {'data': tags_data, 'total_count': total_count}
     return HttpResponse(json.dumps(data), mimetype="application/json")
+
+@login_required()
+def export_bookmark(request):
+    bookmarks = Bookmark.objects.filter(owner=request.user)
+    export_data = render_to_string(
+        "bookmark/export_bookmark_template.txt", {"bookmarks" : bookmarks})
+    response = HttpResponse(mimetype='text/html')
+    response['Content-Disposition'] = 'attachment; filename=bookmarks.html'
+    response.write(export_data)
+    return response

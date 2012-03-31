@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-    <form id="import_file_form" action="{% url import_firefox_bookmark %}" method="post" enctype="multipart/form-data">
+    <form id="import_file_form" action="{% url import_bookmark %}" method="post" enctype="multipart/form-data">
         <fieldset>
             <legend>{% trans "Import bookmarks" %}</legend>
             <div class="alert alert-block alert-info">
