@@ -251,9 +251,6 @@
     }
 
     $(function () {
-        // init page data and render to page
-        init_pagination();
-
         $("body")
                 .ajaxStart(function () {
                     $(this).mask("{% trans 'Loading...' %}")
@@ -261,6 +258,9 @@
                 .ajaxComplete(function () {
                     $(this).unmask();
                 });
+
+        // init page data and render to page
+        init_pagination();
 
         render_tag();
 
