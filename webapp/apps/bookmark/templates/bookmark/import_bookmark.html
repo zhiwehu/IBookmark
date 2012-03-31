@@ -31,6 +31,14 @@
     <script src="{{ STATIC_URL }}js/jquery.loadmask.min.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.tagsinput.min.js"></script>
     <script type="text/javascript">
+        var uvOptions = {};
+        (function() {
+            var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+            uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/pfJgyrQ0QIKHXSITUEaPEA.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+        })();
+    </script>
+    <script type="text/javascript">
     $(function() {
         $("#import_file_form").submit(function() {
             $("body").mask("{% trans 'Importing...' %}");

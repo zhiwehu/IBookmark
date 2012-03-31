@@ -15,7 +15,7 @@ AUTHENTICATION_BACKENDS = (
 #    "django.contrib.auth.backends.ModelBackend",
     "account.auth_backends.AuthenticationBackend",
 #    "social_auth.backends.twitter.TwitterBackend",
-    "social_auth.backends.facebook.FacebookBackend",
+#    "social_auth.backends.facebook.FacebookBackend",
 #    "social_auth.backends.google.GoogleOAuthBackend",
 #    "social_auth.backends.google.GoogleOAuth2Backend",
     "social_auth.backends.google.GoogleBackend",
@@ -48,8 +48,8 @@ AUTHENTICATION_BACKENDS = (
 #
 #TWITTER_CONSUMER_KEY         = ""
 #TWITTER_CONSUMER_SECRET      = ""
-FACEBOOK_APP_ID              = '203404126401249'
-FACEBOOK_API_SECRET          = 'f101067288e758e39e6854376623217a'
+#FACEBOOK_APP_ID              = ''
+#FACEBOOK_API_SECRET          = ''
 #SINAWEIBO_APP_ID              = '3926699931'
 #SINAWEIBO_API_SECRET          = '7872e7b8dcb0a25c833b1a8adc95c43f'
 #LINKEDIN_CONSUMER_KEY        = ""
@@ -72,7 +72,7 @@ FACEBOOK_API_SECRET          = 'f101067288e758e39e6854376623217a'
 #Setup login URLs:
 #
 #LOGIN_URL          = "/login-form/"
-LOGIN_REDIRECT_URL = "/account/social/"
+LOGIN_REDIRECT_URL = "/"
 #LOGIN_ERROR_URL    = "/login-error/"
 #
 #Check Django documentation at Login URL and Login redirect URL
