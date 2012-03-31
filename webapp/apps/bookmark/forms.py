@@ -5,6 +5,7 @@ from django.forms.models import ModelForm
 from django.template.defaultfilters import filesizeformat
 from django.utils.translation import gettext_lazy as _
 from models import Bookmark
+from taggit.forms import TagField
 
 class BookmarkForm(ModelForm):
     def clean_tags(self):
@@ -22,6 +23,8 @@ class BookmarkForm(ModelForm):
 
 class FileForm(Form):
     file  = forms.FileField('Bookmark file', help_text=u'(Maximum file size of 1 MB)')
+    tags = TagField('Tags', required=False, help_text=u'A comma-separated list of tags. At most 3.')
+    public = forms.BooleanField(required=False, help_text=u'Make all import bookmarks public or not.')
 
     def clean_file(self):
         data = self.cleaned_data["file"]
@@ -37,3 +40,11 @@ class FileForm(Form):
                     _(u"Your file is too big (%(size)s), the maximum allowed size is %(max_valid_size)s") %
                     { "size" : filesizeformat(data.size), "max_valid_size" : filesizeformat(1*1024*1024)} )
         return data
+
+    def clean_tags(self):
+        tags = self.cleaned_data['tags']
+        if len(tags) > 3:
+            raise forms.ValidationError(_(u'You can not add tags more the 3'))
+
+        tags = [x.lower() for x in tags]
+        return tags

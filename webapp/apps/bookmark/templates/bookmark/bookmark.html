@@ -10,6 +10,7 @@
 {% block extra_script %}
     <script src="{{ STATIC_URL }}js/jquery.pagination.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.tmpl.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tagsinput.min.js"></script>
     <script id="bookmark_row" type="text/x-jquery-tmpl">
         <tr>
             <td><a href="${url}" target="_blank">${url}</a></td>
@@ -17,7 +18,7 @@
             <td>
                 {% templatetag openvariable %}each(i, tag) tags{% templatetag closevariable %}
                 <a class="tag" href="{% url api_bookmarks %}?tag=${tag.id}"><span
-                        class="label label-info">${tag.name}</span></a>
+                        class="label label-info" value="${tag.name}">${tag.name}</span></a>
                 {% templatetag openvariable %}/each{% templatetag closevariable %}
             </td>
             <td><a class="owner" href="{% url api_bookmarks %}?owner_id=${owner.id}">${owner.username}</a></td>
@@ -26,7 +27,7 @@
     </script>
     <script id="tag_row" type="text/x-jquery-tmpl">
         <a class="tag" href="{% url api_bookmarks %}?tag=${id}">
-            <span class="label label-info">${name} x ${bookmark_count}</span>
+            <span class="label label-info" value="${name}">${name} x ${bookmark_count}</span>
         </a>
     </script>
     <script type="text/javascript">
@@ -118,6 +119,25 @@
             // init page data and render to page
             init_pagination();
 
+            {% comment %}
+            // Init tag filter
+            $("#tags_filter").tagsInput({
+                //'autocomplete_url': url_to_autocomplete_api,
+                //'autocomplete': { option: value, option: value},
+                'height':'30px',
+                'width':'auto',
+                'interactive':true,
+                'defaultText':'',
+                //'onAddTag':callback_function,
+                //'onRemoveTag':callback_function,
+                //'onChange' : callback_function,
+                'removeWithBackspace':true,
+                'minChars':0,
+                'maxChars':0, //if not provided there is no limit,
+                'placeholderColor':'#666666'
+            });
+            {% endcomment %}
+
             // init top 10 tags
             render_tag();
 
@@ -125,7 +145,11 @@
             $("body").delegate("a.tag", "click", function () {
                 api_url = $(this).attr("href");
                 $("#data_title").html('{% trans "Bookmarks tagged by" %} ' + $(this).html());
-
+                {% comment %}
+                tag = $.trim($(this).children().attr("value"));
+                $("#tags_filter").removeTag(tag);
+                $("#tags_filter").addTag(tag);
+                {% endcomment %}
                 init_pagination();
                 return false;
             });
@@ -153,6 +177,13 @@
     <h3 id="data_title">
         {% trans "All public bookmarks" %}
     </h3>
+
+    {% comment %}
+    <div class="row">
+        <div class="span2"><label for="tags_filter"><h3>{% trans "Tag filter" %}</h3></label></div>
+        <div class="span8"><input id="tags_filter" type="text"></div>
+    </div>
+    {% endcomment %}
 
     <table id="bookmarks_table" class="table table-striped table-bordered datatable">
         <thead>

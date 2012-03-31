@@ -29,10 +29,28 @@
 
 {% block extra_script %}
     <script src="{{ STATIC_URL }}js/jquery.loadmask.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tagsinput.min.js"></script>
     <script type="text/javascript">
     $(function() {
         $("#import_file_form").submit(function() {
             $("body").mask("{% trans 'Importing...' %}");
+        });
+
+        // Init tag input
+        $("#id_tags").tagsInput({
+            //"autocomplete_url": url_to_autocomplete_api,
+            //"autocomplete": { option: value, option: value},
+            "height":"60px",
+            "width":"300px",
+            "interactive":true,
+            "defaultText":"",
+            //"onAddTag":callback_function,
+            //"onRemoveTag":callback_function,
+            //"onChange" : callback_function,
+            "removeWithBackspace":true,
+            "minChars":0,
+            "maxChars":0, //if not provided there is no limit,
+            "placeholderColor":"#666666"
         });
     })
     </script>

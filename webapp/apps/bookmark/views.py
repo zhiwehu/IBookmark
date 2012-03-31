@@ -62,11 +62,14 @@ def import_firefox_bookmark(request, template_name='bookmark/import_bookmark.htm
     file_form = FileForm(request.POST or None, request.FILES or None)
     if request.method == 'POST' and file_form.is_valid():
         file = request.FILES['file']
+        tags = file_form.cleaned_data['tags']
+        public =file_form.cleaned_data['public']
         try:
             bookmarks = parse_firefox_bookmark(file)
             for bk in bookmarks:
-                bookmark = Bookmark.objects.create(url=bk['url'], title=bk['title'], owner=request.user)
-                tags=parse_tags(bk['tags'])
+                bookmark = Bookmark.objects.create(url=bk['url'], title=bk['title'], owner=request.user, public=public)
+                if not tags:
+                    tags=parse_tags(bk['tags'])
                 for tag in tags:
                     bookmark.tags.add(tag)
             return HttpResponseRedirect(reverse("my_bookmark"))
