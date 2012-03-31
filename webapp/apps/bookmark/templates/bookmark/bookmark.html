@@ -131,7 +131,7 @@
             // init page data and render to page
             init_pagination();
 
-            $("#bookmarks_table")
+            $("body")
                     .ajaxStart(function () {
                         $(this).mask("{% trans 'Loading...' %}")
                     })
