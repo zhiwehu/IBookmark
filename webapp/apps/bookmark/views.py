@@ -68,11 +68,14 @@ def import_bookmark(request, template_name='bookmark/import_bookmark.html'):
         try:
             bookmarks = parse_firefox_bookmark(file)
             for bk in bookmarks:
-                bookmark = Bookmark.objects.create(url=bk['url'], title=bk['title'], owner=request.user, public=public)
-                if not tags:
-                    tags=parse_tags(bk['tags'])
-                for tag in tags:
-                    bookmark.tags.add(tag)
+                try:
+                    bookmark = Bookmark.objects.create(url=bk['url'], title=bk['title'], owner=request.user, public=public)
+                    if not tags:
+                        tags=parse_tags(bk['tags'])
+                    for tag in tags:
+                        bookmark.tags.add(tag)
+                except Exception:
+                    pass
             return HttpResponseRedirect(reverse("my_bookmark"))
         except Exception, e:
             file_form._errors[NON_FIELD_ERRORS] = ErrorList([e.message])
