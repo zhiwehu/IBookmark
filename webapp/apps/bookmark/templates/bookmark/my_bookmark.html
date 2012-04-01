@@ -70,45 +70,54 @@
         else return a + separator + k + "=" + v;
     }
 
-    /*
-     * @param {int}page_index New Page index
-     * @param {$} jq the container with the pagination links as a $ object
-     */
     function init_pagination() {
-        api_url = update_parameter(api_url, "items_per_page", 1);
+        api_url = update_parameter(api_url, "items_per_page", items_per_page)
         $.ajax({
             url:api_url,
-            dataType:"json",
             cache:false,
-            success:function (data) {
-                if (data && data.redirect) {
-                    window.location.href = data.redirect;
+            success:function (bookmarks) {
+                if (bookmarks && bookmarks.redirect) {
+                    window.location.href = bookmarks.redirect;
                 }
-                if (data.total_count > 0) {
-                    $("#pagination_div").pagination(data.total_count, {
+                if (bookmarks.total_count > 0) {
+                    $("#bookmarks_table tbody tr").remove();
+                    $("#bookmarks_table tbody").empty();
+                    $("#bookmark_row").tmpl(bookmarks.data).appendTo("#bookmarks_table tbody");
+                    $("#pagination_div").pagination(bookmarks.total_count, {
                         items_per_page:items_per_page,
                         num_display_entries:2,
                         num_edge_entries:2,
                         prev_text:"&larr; Previous",
                         next_text:"Next &rarr;",
-                        callback:pagination_callback
+                        callback:render_bookmark
                     });
                 } else {
                     $("#bookmarks_table tbody").empty();
-                    $("#bookmarks_table tbody").html('<tr><td colspan="6">{% trans "No Data" %}</td></tr>');
+                    $("#bookmarks_table tbody").html('<tr><td colspan="5">{% trans "No Data" %}</td></tr>');
                     $("#pagination_div").empty();
                 }
             },
-            error:function (xmlHttpRequest, textStatus, errorThrown) {
-                //alert(textStatus);
-            }
+            dataType:"json"
         });
     }
 
-    function pagination_callback(page_index, jq) {
-        api_url = update_parameter(api_url, "items_per_page", items_per_page)
+    function render_bookmark(page_index) {
         api_url = update_parameter(api_url, "current_page", page_index + 1)
-        render_data();
+        $.ajax({
+            url:api_url,
+            cache:false,
+            success:function (bookmarks) {
+                if (bookmarks.data.length > 0) {
+                    $("#bookmarks_table tbody tr").remove();
+                    $("#bookmarks_table tbody").empty();
+                    $("#bookmark_row").tmpl(bookmarks.data).appendTo("#bookmarks_table tbody");
+                } else {
+                    $("#bookmarks_table tbody").empty();
+                    $("#bookmarks_table tbody").html('<tr><td colspan="5">{% trans "No Data" %}</td></tr>');
+                }
+            },
+            dataType:"json"
+        });
     }
 
     function apply_form_field_error(fieldname, error) {
@@ -162,23 +171,6 @@
 
         $.ajax(send_dict);
         return false;
-    }
-
-    function render_data() {
-        $.ajax({
-            url:api_url,
-            success:function (bookmarks) {
-                if (bookmarks.data.length > 0) {
-                    $("#bookmarks_table tbody tr").remove();
-                    $("#bookmarks_table tbody").empty();
-                    $("#bookmark_row").tmpl(bookmarks.data).appendTo("#bookmarks_table tbody");
-                } else {
-                    $("#bookmarks_table tbody").empty();
-                }
-            },
-            dataType:"json",
-            cache:false
-        });
     }
 
     function update_bookmark(url) {

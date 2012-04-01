@@ -54,29 +54,26 @@
             else return a + separator + k + "=" + v;
         }
 
-        /*
-         * @param {int}page_index New Page index
-         * @param {$} jq the container with the pagination links as a $ object
-         */
         function init_pagination() {
-            api_url = update_parameter(api_url, "items_per_page", 1);
-            //alert(api_url);
+            api_url = update_parameter(api_url, "items_per_page", items_per_page)
             $.ajax({
                 url:api_url,
                 cache:false,
-                success:function (data) {
-                    if (data && data.redirect) {
-                        window.location.href = data.redirect;
+                success:function (bookmarks) {
+                    if (bookmarks && bookmarks.redirect) {
+                        window.location.href = bookmarks.redirect;
                     }
-                    if (data.total_count > 0) {
-                        //alert("1");
-                        $("#pagination_div").pagination(data.total_count, {
+                    if (bookmarks.total_count > 0) {
+                        $("#bookmarks_table tbody tr").remove();
+                        $("#bookmarks_table tbody").empty();
+                        $("#bookmark_row").tmpl(bookmarks.data).appendTo("#bookmarks_table tbody");
+                        $("#pagination_div").pagination(bookmarks.total_count, {
                             items_per_page:items_per_page,
                             num_display_entries:2,
                             num_edge_entries:2,
                             prev_text:"&larr; Previous",
                             next_text:"Next &rarr;",
-                            callback:pagination_callback
+                            callback:render_bookmark
                         });
                     } else {
                         $("#bookmarks_table tbody").empty();
@@ -88,13 +85,8 @@
             });
         }
 
-        function pagination_callback(page_index, jq) {
-            api_url = update_parameter(api_url, "items_per_page", items_per_page)
+        function render_bookmark(page_index) {
             api_url = update_parameter(api_url, "current_page", page_index + 1)
-            render_bookmark();
-        }
-
-        function render_bookmark() {
             $.ajax({
                 url:api_url,
                 cache:false,
@@ -105,6 +97,7 @@
                         $("#bookmark_row").tmpl(bookmarks.data).appendTo("#bookmarks_table tbody");
                     } else {
                         $("#bookmarks_table tbody").empty();
+                        $("#bookmarks_table tbody").html('<tr><td colspan="5">{% trans "No Data" %}</td></tr>');
                     }
                 },
                 dataType:"json"
@@ -127,7 +120,9 @@
             });
         }
 
+        // Main function
         $(function () {
+            // Add loading
             $("body")
                     .ajaxStart(function () {
                         $(this).mask("{% trans 'Loading...' %}")
@@ -139,25 +134,6 @@
             // init page data and render to page
             init_pagination();
 
-            {% comment %}
-            // Init tag filter
-            $("#tags_filter").tagsInput({
-                //'autocomplete_url': url_to_autocomplete_api,
-                //'autocomplete': { option: value, option: value},
-                'height':'30px',
-                'width':'auto',
-                'interactive':true,
-                'defaultText':'',
-                //'onAddTag':callback_function,
-                //'onRemoveTag':callback_function,
-                //'onChange' : callback_function,
-                'removeWithBackspace':true,
-                'minChars':0,
-                'maxChars':0, //if not provided there is no limit,
-                'placeholderColor':'#666666'
-            });
-            {% endcomment %}
-
             // init top 10 tags
             render_tag();
 
@@ -165,11 +141,6 @@
             $("body").delegate("a.tag", "click", function () {
                 api_url = $(this).attr("href");
                 $("#data_title").html('{% trans "Bookmarks tagged by" %} ' + $(this).html());
-                {% comment %}
-                tag = $.trim($(this).children().attr("value"));
-                $("#tags_filter").removeTag(tag);
-                $("#tags_filter").addTag(tag);
-                {% endcomment %}
                 init_pagination();
                 return false;
             });

@@ -170,7 +170,7 @@ jQuery.fn.pagination = function(maxentries, opts){
 		// When all initialisation is done, draw the links
 		drawLinks();
         // call callback function
-        opts.callback(current_page, this);
+        //opts.callback(current_page, this);
 	});
 }
 
