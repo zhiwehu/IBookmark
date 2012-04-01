@@ -3,7 +3,7 @@
 <ul class="nav nav-pills">
     <li {% if active == "bookmark" %}class="active"{% endif %}>
         <a href="{% url bookmark %}">
-            <i class="icon-bookmark icon-white"></i>&nbsp;{% trans "Bookmarks" %}
+            <i class="icon-bookmark icon-white"></i>&nbsp;{% trans "Home" %}
         </a>
     </li>
     {% if request.user.is_authenticated %}
