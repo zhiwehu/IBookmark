@@ -1,7 +1,10 @@
 {% load i18n %}
+<hr />
 <div>
-    <a>{% trans "About us" %}</a> |
-    <a>{% trans "Contact us" %}</a>
+    <a href="{% url about %}">{% trans "About" %}</a> |
+    <a href="http://www.spidersns.com/wordpress">{% trans "Blog" %}</a> |
+    <a href="http://www.weibo.com/lettoo">新浪微博</a> |
+    <a href="mailto:golettoo@gmail.com">{% trans "Contact me" %}</a>
 </div>
 <div class="legal">
     {% trans "&copy; 2012 golettoo@gmail.com" %}

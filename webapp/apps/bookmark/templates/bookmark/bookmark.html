@@ -165,6 +165,19 @@
 {% endblock %}
 
 {% block body %}
+    {% if not request.user.is_authenticated %}
+    <div class="alert alert-block alert-info">
+        <a class="close">&times;</a>
+        <h4 class="alert-heading">Welcome!</h4>
+        <ul>
+            <li>Free to usage! <a href="{% url acct_signup %}">Signup now!</a></li>
+            <li>Manage your bookmarks with tags online.</li>
+            <li>It can import the bookmarks from Firefox, Safari, Chrome, etc.</li>
+            <li>It can import the bookmarks from google bookmark, delicious, etc</li>
+            <li>It can export the bookmarks for Firefox, Safari, Chrome and google, delicious, etc</li>
+        </ul>
+    </div>
+    {% endif %}
     <h3 id="data_title">
         {% trans "All public bookmarks" %}
     </h3>
