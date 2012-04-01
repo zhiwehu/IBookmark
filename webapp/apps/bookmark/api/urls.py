@@ -3,9 +3,8 @@ import json
 from django.conf.urls.defaults import patterns, url
 from authentication import DjangoAuthentication
 from django.http import HttpResponseBadRequest
-from handlers import BookmarkHandler
+from handlers import BookmarkHandler, MyBookmarkHandler
 from piston.utils import rc
-from webapp.apps.bookmark.api.handlers import MyBookmarkHandler
 
 class Resource(Resource):
 

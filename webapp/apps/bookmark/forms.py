@@ -24,7 +24,7 @@ class BookmarkForm(ModelForm):
 class FileForm(Form):
     file  = forms.FileField('Bookmark file', help_text=u'(Maximum file size of 1 MB)')
     tags = TagField('Tags', required=False, help_text=u'A comma-separated list of tags. At most 3.')
-    public = forms.BooleanField(required=False, help_text=u'Make all import bookmarks public or not.')
+    public = forms.BooleanField(required=False, initial=True, help_text=u'Make all import bookmarks public or not.')
 
     def clean_file(self):
         data = self.cleaned_data["file"]

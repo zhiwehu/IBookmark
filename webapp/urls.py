@@ -21,6 +21,8 @@ urlpatterns = patterns('',
 
     url(r'^account/', include('account.urls')),
 
+    url(r'^admin_invite_user/$', 'signup_codes.views.admin_invite_user', name='admin_invite_user'),
+
     url(r'^social/', include('social_auth.urls')),
 
     url(r'^about/', include('about.urls')),
