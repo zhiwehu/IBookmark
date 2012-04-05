@@ -1,0 +1,70 @@
+# Update ec2
+sudo yum update -y
+
+# Install dependences
+sudo yum install gcc python-devel git httpd mod_wsgi mod_ssl mysql mysql-server mysql-devel -y
+sudo easy_install virtualenv
+
+# Clone project
+git clone git://github.com/zhiweihu/cbk.git
+
+# Build virtualenv
+cd cbk
+virtualenv env
+source env/bin/activate
+pip install -r webapp/requirement.txt
+
+# Build db
+sudo vi /etc/my.cnf
+Add content as below:
+[mysqld]
+init_connect='SET NAMES utf8'
+[client]
+default-character-set=utf8
+sudo service mysqld start
+sudo mysqladmin -u root password xxxxxxxx
+mysql -u root -p
+mysql> CREATE DATABASE cbk CHARACTER SET utf8;
+mysql> GRANT ALL PRIVILEGES ON cbk.* TO "cbkuser"@"localhost" IDENTIFIED BY "xxxxxxxx";
+mysql> FLUSH PRIVILEGES;
+mysql> EXIT;
+
+# Config apache httpd
+sudo vi /etc/httpd/conf.d/wsgi.conf
+#----------Begin----------#
+LoadModule wsgi_module modules/mod_wsgi.so
+WSGISocketPrefix run/wsgi
+WSGIDaemonProcess cbk python-path=/home/ec2-user/cbk/env/lib64/python2.6/site-packages/
+WSGIProcessGroup cbk
+WSGIScriptAlias / /home/ec2-user/cbk/webapp/wsgi.py
+Alias /site_media/ /home/ec2-user/cbk/webapp/site_media/
+#-----------End-----------#
+sudo vi /etc/httpd/conf/httpd.conf
+User ec2-user
+
+# local settings
+vi webapp/local_settings.py
+DATABASES = {
+    'default': {
+        'ENGINE'   : 'django.db.backends.mysql',
+        'NAME'     : 'cbk',
+        'USER'     : 'cbkuser',
+        'PASSWORD' : 'xxxxxxxx',
+        'HOST'     : '',
+        'PORT'     : '',
+    }
+}
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'xxx@gmail.com'
+EMAIL_HOST_PASSWORD = 'xxx'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# sync db and collect static
+cd webapp
+python manage.py syncdb
+python manage.py collectstatic
+
+# Start httpd
+sudo /etc/init.d/httpd restart
