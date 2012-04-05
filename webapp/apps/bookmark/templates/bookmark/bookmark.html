@@ -167,7 +167,7 @@
 {% block body %}
     {% if not request.user.is_authenticated %}
     <div class="alert alert-block alert-info">
-        <a class="close">&times;</a>
+        <a data-dismiss="alert" class="close">&times;</a>
         <h4 class="alert-heading">Welcome!</h4>
         <ul>
             <li>Free to usage! <a href="{% url acct_signup %}">Signup now!</a></li>
