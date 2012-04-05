@@ -93,7 +93,7 @@
                     });
                 } else {
                     $("#bookmarks_table tbody").empty();
-                    $("#bookmarks_table tbody").html('<tr><td colspan="5">{% trans "No Data" %}</td></tr>');
+                    $("#bookmarks_table tbody").html('<tr><td colspan="6">{% trans "No Data" %}</td></tr>');
                     $("#pagination_div").empty();
                 }
             },
@@ -113,7 +113,7 @@
                     $("#bookmark_row").tmpl(bookmarks.data).appendTo("#bookmarks_table tbody");
                 } else {
                     $("#bookmarks_table tbody").empty();
-                    $("#bookmarks_table tbody").html('<tr><td colspan="5">{% trans "No Data" %}</td></tr>');
+                    $("#bookmarks_table tbody").html('<tr><td colspan="6">{% trans "No Data" %}</td></tr>');
                 }
             },
             dataType:"json"
