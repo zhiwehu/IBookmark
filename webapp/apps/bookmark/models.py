@@ -41,6 +41,7 @@ def create_bookmark_url(sender, instance=None, **kwargs):
     if instance is None:
         return
     bookmark_url, created = BookmarkUrl.objects.get_or_create(url=instance.url)
-    count = Bookmark.objects.filter(url=instance.url).count()
-    bookmark_url.count = count
+    #count = Bookmark.objects.filter(url=instance.url).count()
+    #count = bookmark_url.count + 1
+    #bookmark_url.count = count
     bookmark_url.save()

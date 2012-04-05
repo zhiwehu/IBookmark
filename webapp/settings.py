@@ -185,7 +185,7 @@ AUTHENTICATION_BACKENDS = (
     )
 
 LOGIN_URL = '/account/login/' # @@@ any way this can be a url name?
-LOGIN_REDIRECT_URLNAME = 'home'
+LOGIN_REDIRECT_URLNAME = 'my_bookmark'
 LOGOUT_REDIRECT_URLNAME = 'home'
 
 EMAIL_CONFIRMATION_DAYS = 2
