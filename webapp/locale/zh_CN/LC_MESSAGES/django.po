@@ -605,11 +605,11 @@ msgstr "如果重围密码有任何问题，请发送邮件至<a href=\"mailto:%
 msgid ""
 "We have sent you an email. If you do not receive it within a few minutes, "
 "contact us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
-msgstr ""
+msgstr "联系我们<a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
 #: .\apps\theme\templates\account\password_reset_from_key.html.py:8
 msgid "Bad Token"
-msgstr ""
+msgstr "无效的Token"
 
 #: .\apps\theme\templates\account\password_reset_from_key.html.py:12
 #, python-format
@@ -621,25 +621,25 @@ msgstr ""
 
 #: .\apps\theme\templates\account\password_set.html.py:16
 msgid "Set password"
-msgstr ""
+msgstr "设置密码"
 
 #: .\apps\theme\templates\account\signup.html.py:7
 #: .\apps\theme\templates\account\signup.html.py:10
 msgid "Sign Up"
-msgstr ""
+msgstr "注册"
 
 #: .\apps\theme\templates\account\signup.html.py:15
 msgid "You are already logged in."
-msgstr ""
+msgstr "你已经成功登录"
 
 #: .\apps\theme\templates\account\signup.html.py:17
 msgid "Already have an account?"
-msgstr ""
+msgstr "已经有一个帐户?"
 
 #: .\apps\theme\templates\account\signup.html.py:27
 #: .\apps\theme\templates\django_openid\register.html.py:22
 msgid "Sign up"
-msgstr ""
+msgstr "注册"
 
 #: .\apps\theme\templates\account\signup.html.py:41
 #: .\apps\theme\templates\django_openid\register.html.py:32
@@ -652,34 +652,34 @@ msgstr ""
 #: .\apps\theme\templates\account\social_relationship.html.py:6
 #: .\apps\theme\templates\account\social_relationship.html.py:9
 msgid "Social Relationship"
-msgstr ""
+msgstr "社交网络关联"
 
 #: .\apps\theme\templates\account\social_relationship.html.py:11
 msgid "Associated"
-msgstr ""
+msgstr "已经关联"
 
 #: .\apps\theme\templates\account\social_relationship.html.py:14
 msgid "Disconnect"
-msgstr ""
+msgstr "解除关联"
 
 #: .\apps\theme\templates\account\social_relationship.html.py:19
 msgid "Not associated"
-msgstr ""
+msgstr "未关联"
 
 #: .\apps\theme\templates\account\timezone_change.html.py:11
 msgid ""
 "This site can localize all times into your preferred timezone. Change your "
 "timezone below."
-msgstr ""
+msgstr "本网站可以设置你所在位置的时区"
 
 #: .\apps\theme\templates\account\timezone_change.html.py:18
 msgid "Change my timezone"
-msgstr ""
+msgstr "修改我的时区"
 
 #: .\apps\theme\templates\account\verification_sent.html.py:5
 #: .\apps\theme\templates\account\verification_sent.html.py:8
 msgid "Verify your email address"
-msgstr ""
+msgstr "验证邮箱"
 
 #: .\apps\theme\templates\account\verification_sent.html.py:14
 #, python-format
@@ -694,7 +694,7 @@ msgstr ""
 #: .\apps\theme\templates\django_openid\already_logged_in.html.py:5
 #: .\apps\theme\templates\django_openid\already_logged_in.html.py:8
 msgid "Already logged in"
-msgstr ""
+msgstr "已经成功登录"
 
 #: .\apps\theme\templates\django_openid\already_logged_in.html.py:10
 #, python-format
@@ -706,7 +706,7 @@ msgstr ""
 #: .\apps\theme\templates\django_openid\associate.html.py:6
 #: .\apps\theme\templates\django_openid\associate.html.py:9
 msgid "Verify this Association"
-msgstr ""
+msgstr "验证这个关联"
 
 #: .\apps\theme\templates\django_openid\associations.html.py:8
 msgid "Manage OpenID Associations"
@@ -728,7 +728,7 @@ msgstr ""
 
 #: .\apps\theme\templates\django_openid\associations.html.py:26
 msgid "remove"
-msgstr ""
+msgstr "移除"
 
 #: .\apps\theme\templates\django_openid\associations.html.py:33
 msgid "To associate a new OpenID with this account, sign in with it here:"
@@ -745,20 +745,20 @@ msgstr ""
 
 #: .\apps\theme\templates\django_openid\login.html.py:8
 msgid "Login"
-msgstr ""
+msgstr "登录"
 
 #: .\apps\theme\templates\django_openid\login.html.py:12
 msgid "Log In to OpenID"
-msgstr ""
+msgstr "使用OpenID登录"
 
 #: .\apps\theme\templates\django_openid\register.html.py:6
 #: .\apps\theme\templates\django_openid\register.html.py:9
 msgid "Choose a Username"
-msgstr ""
+msgstr "选择一个用户名"
 
 #: .\apps\theme\templates\django_openid\register.html.py:12
 msgid "Please correct the errors below:"
-msgstr ""
+msgstr "错误如下"
 
 #: .\apps\theme\templates\django_openid\register.html.py:15
 msgid ""
@@ -784,7 +784,7 @@ msgstr ""
 #: .\apps\theme\templates\django_openid\registration_closed.html.py:5
 #: .\apps\theme\templates\django_openid\registration_closed.html.py:8
 msgid "Signup closed"
-msgstr ""
+msgstr "不允许注册"
 
 #: .\apps\theme\templates\django_openid\registration_closed.html.py:10
 msgid ""
@@ -794,11 +794,11 @@ msgstr ""
 
 #: .\apps\theme\templates\emailconfirmation\confirm_email.html.py:6
 msgid "Confirm Email"
-msgstr ""
+msgstr "确认邮箱"
 
 #: .\apps\theme\templates\emailconfirmation\confirm_email.html.py:10
 msgid "Email Confirmed"
-msgstr ""
+msgstr "邮箱已经确认"
 
 #: .\apps\theme\templates\emailconfirmation\confirm_email.html.py:12
 #, python-format
@@ -809,21 +809,21 @@ msgstr ""
 
 #: .\apps\theme\templates\emailconfirmation\confirm_email.html.py:14
 msgid "Invalid confirmation key."
-msgstr ""
+msgstr "无效的验证码"
 
 #: .\apps\theme\templates\idios\base.html.py:10
 msgid "Profile"
-msgstr ""
+msgstr "配置"
 
 #: .\apps\theme\templates\idios\base.html.py:11
 msgid "Your Profile"
-msgstr ""
+msgstr "你的配置"
 
 #: .\apps\theme\templates\idios\base.html.py:12
 #: .\apps\theme\templates\idios\profiles.html.py:7
 #: .\apps\theme\templates\idios\profiles.html.py:10
 msgid "All Profiles"
-msgstr ""
+msgstr "所有配置"
 
 #: .\apps\theme\templates\idios\profile.html.py:6
 #: .\apps\theme\templates\idios\profile.html.py:11
@@ -839,7 +839,7 @@ msgstr ""
 
 #: .\apps\theme\templates\idios\profile_edit_ajax_success.html.py:4
 msgid "Success!"
-msgstr ""
+msgstr "成功"
 
 #: .\apps\theme\templates\notification\base.html.py:13
 #: .\apps\theme\templates\notification\base.html.py:14
@@ -850,7 +850,7 @@ msgstr ""
 #: .\apps\theme\templates\notification\base.html.py:15
 #: .\apps\theme\templates\notification\notice_settings.html.py:9
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: .\apps\theme\templates\notification\notice_settings.html.py:6
 msgid "Notification Settings"
@@ -858,7 +858,7 @@ msgstr ""
 
 #: .\apps\theme\templates\notification\notice_settings.html.py:15
 msgid "Primary email"
-msgstr ""
+msgstr "主邮箱(当前使用)"
 
 #: .\apps\theme\templates\notification\notice_settings.html.py:17
 #, python-format
@@ -882,7 +882,7 @@ msgstr ""
 
 #: .\apps\theme\templates\notification\notice_settings.html.py:50
 msgid "Change"
-msgstr ""
+msgstr "更改"
 
 #: .\apps\theme\templates\notification\notices.html.py:15
 msgid "Mark all unseen notices seen"
@@ -899,12 +899,12 @@ msgstr ""
 #: .\apps\theme\templates\pagination\pagination.html.py:8
 #: .\apps\theme\templates\pagination\pagination.html.py:11
 msgid "Previous"
-msgstr ""
+msgstr "前一页"
 
 #: .\apps\theme\templates\pagination\pagination.html.py:21
 #: .\apps\theme\templates\pagination\pagination.html.py:23
 msgid "Next"
-msgstr ""
+msgstr "后一页"
 
 #: .\apps\theme\templates\signup_codes\admin_invite_user.html.py:8
 msgid ""
