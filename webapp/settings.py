@@ -42,7 +42,7 @@ LANGUAGE_CODE = 'en-us'
 gettext = lambda s: s
 LANGUAGES = (
     ('en', gettext('English')),
-    ('fr', gettext('France')),
+    #('fr', gettext('France')),
     ('zh-cn', gettext('Simplified Chinese')),
     ('zh-tw', gettext('Chinese Traditional')),
     )
