@@ -1,0 +1,994 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-09 16:49+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: .\settings.py:44
+msgid "English"
+msgstr "英语"
+
+#: .\settings.py:46
+msgid "Simplified Chinese"
+msgstr "简体中文"
+
+#: .\settings.py:47
+msgid "Chinese Traditional"
+msgstr "繁体中文"
+
+#: .\apps\account\forms.py:43 .\apps\account\forms.py:116
+#: .\apps\account\forms.py:335
+msgid "Password"
+msgstr "密码"
+
+#: .\apps\account\forms.py:47
+msgid "Remember Me"
+msgstr "记住我"
+
+#: .\apps\account\forms.py:48
+msgid "If checked you will stay logged in for 3 weeks"
+msgstr "记住帐户3星期"
+
+#: .\apps\account\forms.py:59 .\apps\account\forms.py:133
+#: .\apps\account\forms.py:274 .\apps\account\forms.py:356
+msgid "Email"
+msgstr ""
+
+#: .\apps\account\forms.py:64 .\apps\account\forms.py:111
+msgid "Username"
+msgstr "用户名"
+
+#: .\apps\account\forms.py:92
+msgid "This account is currently inactive."
+msgstr "这个帐户没有激活"
+
+#: .\apps\account\forms.py:95
+msgid "The email address and/or password you specified are not correct."
+msgstr "邮件或者密码不正确"
+
+#: .\apps\account\forms.py:97
+msgid "The username and/or password you specified are not correct."
+msgstr "用户名或者密码不正确"
+
+#: .\apps\account\forms.py:120 .\apps\account\forms.py:339
+msgid "Password (again)"
+msgstr "再次输入密码"
+
+#: .\apps\account\forms.py:136
+msgid "Email (optional)"
+msgstr "Email(可选)"
+
+#: .\apps\account\forms.py:141
+msgid "Usernames can only contain letters, numbers and underscores."
+msgstr "用户名只能包含字母、数字和下划线"
+
+#: .\apps\account\forms.py:146
+msgid "This username is already taken. Please choose another."
+msgstr "这个用户名已经被别人用过了，请换一个"
+
+#: .\apps\account\forms.py:155
+msgid "A user is registered with this email address."
+msgstr "这个邮件已经被别的用户使用了"
+
+#: .\apps\account\forms.py:161 .\apps\account\forms.py:164
+#, python-format
+msgid "Password should be in %(min)d to %(max)d"
+msgstr "密码长度应该在%(min)d和%(max)d之间"
+
+#: .\apps\account\forms.py:167 .\apps\account\forms.py:326
+#: .\apps\account\forms.py:346 .\apps\account\forms.py:410
+msgid "You must type the same password each time."
+msgstr "两次输入密码必须一致"
+
+#: .\apps\account\forms.py:216
+msgid "Your email address has already been verified"
+msgstr "你的邮箱已经被验证过了"
+
+#: .\apps\account\forms.py:226 .\apps\account\forms.py:236
+#: .\apps\account\views.py:168 .\apps\account\views.py:183
+#: .\apps\account\views.py:231
+#, python-format
+msgid "Confirmation email sent to %(email)s"
+msgstr "验证邮件已经发送至%(email)s"
+
+#: .\apps\account\forms.py:282
+msgid "This email address already associated with this account."
+msgstr "这个邮箱已经被绑定到这个帐户"
+
+#: .\apps\account\forms.py:283
+msgid "This email address already associated with another account."
+msgstr "这个邮箱已经被别的用户绑定"
+
+#: .\apps\account\forms.py:306
+msgid "Current Password"
+msgstr "当前密码"
+
+#: .\apps\account\forms.py:310 .\apps\account\forms.py:394
+msgid "New Password"
+msgstr "新密码"
+
+#: .\apps\account\forms.py:314 .\apps\account\forms.py:398
+msgid "New Password (again)"
+msgstr "请再次输入新密码"
+
+#: .\apps\account\forms.py:320
+msgid "Please type your current password."
+msgstr "请输入当前密码"
+
+#: .\apps\account\forms.py:363
+msgid "Email address not verified for any user account"
+msgstr "邮箱地址没有被任何用户绑定"
+
+#: .\apps\account\forms.py:381
+msgid "Password reset email sent"
+msgstr "重置密码邮件已经发出"
+
+#: .\apps\account\forms.py:423 .\apps\theme\templates\account\base.html.py:26
+#: .\apps\theme\templates\account\timezone_change.html.py:6
+#: .\apps\theme\templates\account\timezone_change.html.py:9
+msgid "Timezone"
+msgstr "时区"
+
+#: .\apps\account\forms.py:436 .\apps\theme\templates\account\base.html.py:24
+#: .\apps\theme\templates\account\language_change.html.py:6
+#: .\apps\theme\templates\account\language_change.html.py:9
+msgid "Language"
+msgstr "语言"
+
+#: .\apps\account\models.py:18 .\apps\account\models.py:45
+msgid "user"
+msgstr "用户"
+
+#: .\apps\account\models.py:20
+msgid "timezone"
+msgstr "时区"
+
+#: .\apps\account\models.py:21
+msgid "language"
+msgstr "语言"
+
+#: .\apps\account\models.py:47
+msgid "temp_key"
+msgstr "临时key"
+
+#: .\apps\account\models.py:48
+msgid "timestamp"
+msgstr "时间戳"
+
+#: .\apps\account\models.py:49
+msgid "reset yet?"
+msgstr "重置?"
+
+#: .\apps\account\views.py:75 .\apps\account\views.py:138
+#, python-format
+msgid "Successfully logged in as %(user)s."
+msgstr "%(user)s成功登录"
+
+#: .\apps\account\views.py:199
+#, python-format
+msgid "Removed email address %(email)s"
+msgstr "%(email)s被成功移除"
+
+#: .\apps\account\views.py:255 .\apps\account\views.py:374
+msgid "Password successfully changed."
+msgstr "密码修改成功"
+
+#: .\apps\account\views.py:284
+msgid "Password successfully set."
+msgstr "密码重置成功"
+
+#: .\apps\account\views.py:402
+msgid "Timezone successfully updated."
+msgstr "时区修改成功"
+
+#: .\apps\account\views.py:427
+msgid "Language successfully updated."
+msgstr "语言修改成功"
+
+#: .\apps\bookmark\forms.py:14 .\apps\bookmark\forms.py:47
+msgid "You can not add tags more the 3"
+msgstr "你不能增加超过3个标签"
+
+#: .\apps\bookmark\forms.py:35
+#, python-format
+msgid ""
+"%(ext)s is an invalid file extension. Authorized extensions are : %"
+"(valid_exts_list)s"
+msgstr "无效文件扩展%(ext)s，文件名扩展应该在%(valid_exts_list)s里"
+
+#: .\apps\bookmark\forms.py:40
+#, python-format
+msgid ""
+"Your file is too big (%(size)s), the maximum allowed size is %"
+"(max_valid_size)s"
+msgstr "文件长度(%(size)s)超过限制，最大文件长度不能超过%(max_valid_size)s"
+
+#: .\apps\bookmark\models.py:9
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:199
+msgid "Owner"
+msgstr "所有者"
+
+#: .\apps\bookmark\models.py:10 .\apps\bookmark\models.py:27
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:196
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:359
+msgid "URL"
+msgstr ""
+
+#: .\apps\bookmark\models.py:11
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:197
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:360
+msgid "Title"
+msgstr "标题"
+
+#: .\apps\bookmark\models.py:12
+msgid "Limit of 100 characters"
+msgstr "最长100个字符"
+
+#: .\apps\bookmark\models.py:13
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:198
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:361
+msgid "Tags"
+msgstr "标签"
+
+#: .\apps\bookmark\models.py:14
+msgid "A comma-separated list of tags. At most 3."
+msgstr "最多使用3个标签"
+
+#: .\apps\bookmark\models.py:15
+msgid "Public this bookmark"
+msgstr "是否公开这个书签?"
+
+#: .\apps\bookmark\models.py:16
+msgid "Screen shot"
+msgstr "屏幕截图"
+
+#: .\apps\bookmark\models.py:17 .\apps\bookmark\models.py:29
+msgid "Create time"
+msgstr "创建时间"
+
+#: .\apps\bookmark\models.py:18 .\apps\bookmark\models.py:30
+msgid "Last modified time"
+msgstr "最后修改时间"
+
+#: .\apps\bookmark\models.py:28
+msgid "Count"
+msgstr "个数"
+
+#: .\apps\bookmark\templates\bookmark\_menu.html.py:6
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:7
+#: .\apps\theme\templates\signup_codes\admin_invite_user.html.py:4
+msgid "Home"
+msgstr "首页"
+
+#: .\apps\bookmark\templates\bookmark\_menu.html.py:12
+msgid "My Bookmarks"
+msgstr "我的书签"
+
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:80
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:100
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:96
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:116
+msgid "No Data"
+msgstr "无数据"
+
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:128
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:249
+msgid "Loading..."
+msgstr "数据导入中..."
+
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:143
+msgid "Bookmarks tagged by"
+msgstr "标签为"
+
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:151
+msgid "Bookmarks owner by"
+msgstr "所有者为"
+
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:182
+msgid "All public bookmarks"
+msgstr "所有公开的书签"
+
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:200
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:362
+msgid "Created time"
+msgstr "创建时间"
+
+#: .\apps\bookmark\templates\bookmark\bookmark.html.py:221
+msgid "Top 10 tags"
+msgstr "最热门10标签"
+
+#: .\apps\bookmark\templates\bookmark\import_bookmark.html.py:7
+#: .\apps\bookmark\templates\bookmark\import_bookmark.html.py:25
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:343
+msgid "Import"
+msgstr "导入"
+
+#: .\apps\bookmark\templates\bookmark\import_bookmark.html.py:13
+msgid "Import bookmarks"
+msgstr "导入书签"
+
+#: .\apps\bookmark\templates\bookmark\import_bookmark.html.py:45
+msgid "Importing..."
+msgstr "正在导入"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:7
+msgid "Mine"
+msgstr "我的书签"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:45
+msgid "Edit"
+msgstr "编辑"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:50
+msgid "Delete"
+msgstr "删除"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:200
+msgid "The data is not exists, please reload."
+msgstr "数据已经不存在，请重新刷新页面"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:209
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:292
+msgid "Are you sure?"
+msgstr "你确定吗?"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:339
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:386
+msgid "Add bookmark"
+msgstr "增加书签"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:347
+msgid "Export"
+msgstr "导出"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:351
+msgid "Empty"
+msgstr "清空"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:358
+msgid "Public?"
+msgstr "是否公开"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:363
+msgid "Action"
+msgstr "动作"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:398
+msgid "Submit"
+msgstr "提交"
+
+#: .\apps\bookmark\templates\bookmark\my_bookmark.html.py:406
+msgid "My tags"
+msgstr "我的标签"
+
+#: .\apps\signup_codes\views.py:75
+#, python-format
+msgid "Successfully logged in as %(username)s."
+msgstr "%(username)s成功登录"
+
+#: .\apps\signup_codes\views.py:124
+#, python-format
+msgid "An email has been sent to %(email)s."
+msgstr "邮件被成功发送至%(email)s"
+
+#: .\apps\signup_codes\views.py:134
+msgid "Invite user"
+msgstr "邀请用户"
+
+#: .\apps\theme\templates\404.html.py:5
+msgid "Not Found"
+msgstr "没有发现"
+
+#: .\apps\theme\templates\404.html.py:8 .\templates\404.html.py:7
+msgid "We're sorry but that page could not be found."
+msgstr "对不起，出错了"
+
+#: .\apps\theme\templates\500.html.py:5
+msgid "Server Error"
+msgstr "服务器错误"
+
+#: .\apps\theme\templates\500.html.py:8
+msgid ""
+"We're sorry but a server error has occurred. We've been notified and will "
+"look into it as soon as possible."
+msgstr "对不起，服务器出错了，我们会尽快查询原因"
+
+#: .\apps\theme\templates\account\_terms.html.py:5
+#, python-format
+msgid ""
+"By clicking \"Sign Up\", you are indicating that you have read and agree to "
+"the <a href=\"%(terms_url)s\">Terms of Use</a> and <a href=\"%(privacy_url)s"
+"\">Privacy Policy</a>."
+msgstr ""
+
+#: .\apps\theme\templates\account\base.html.py:10
+#: .\apps\theme\templates\account\email.html.py:6
+msgid "Account"
+msgstr "帐户"
+
+#: .\apps\theme\templates\account\base.html.py:11
+#: .\apps\theme\templates\account\email.html.py:9
+msgid "Email Addresses"
+msgstr "邮件地址"
+
+#: .\apps\theme\templates\account\base.html.py:13
+#: .\apps\theme\templates\django_openid\associations.html.py:5
+msgid "OpenID Associations"
+msgstr ""
+
+#: .\apps\theme\templates\account\base.html.py:16
+#: .\apps\theme\templates\account\password_change.html.py:6
+#: .\apps\theme\templates\account\password_change.html.py:9
+#: .\apps\theme\templates\account\password_reset_from_key.html.py:5
+#: .\apps\theme\templates\account\password_reset_from_key.html.py:8
+msgid "Change Password"
+msgstr "修改密码"
+
+#: .\apps\theme\templates\account\base.html.py:18
+#: .\apps\theme\templates\account\password_set.html.py:6
+#: .\apps\theme\templates\account\password_set.html.py:9
+msgid "Set Password"
+msgstr "设置密码"
+
+#: .\apps\theme\templates\account\base.html.py:21
+#: .\apps\theme\templates\account\password_delete.html.py:5
+#: .\apps\theme\templates\account\password_delete.html.py:8
+msgid "Delete Password"
+msgstr "删除密码"
+
+#: .\apps\theme\templates\account\base.html.py:28
+msgid "Social Network"
+msgstr "社交网络"
+
+#: .\apps\theme\templates\account\email.html.py:18
+msgid "verified"
+msgstr "验证"
+
+#: .\apps\theme\templates\account\email.html.py:20
+msgid "primary"
+msgstr "首要(当前使用)"
+
+#: .\apps\theme\templates\account\email.html.py:28
+msgid "Make primary"
+msgstr "设为首要(当前使用)"
+
+#: .\apps\theme\templates\account\email.html.py:33
+msgid "unverified"
+msgstr "未被验证"
+
+#: .\apps\theme\templates\account\email.html.py:40
+msgid "Re-send verification email"
+msgstr "重新发送验证邮件"
+
+#: .\apps\theme\templates\account\email.html.py:51
+msgid "Remove"
+msgstr "移除"
+
+#: .\apps\theme\templates\account\email.html.py:59
+msgid ""
+"You should really add an email address so you can receive notifications, "
+"reset your password if you forget it, etc."
+msgstr "你可以增加其他的邮件用来收取通知，重置密码"
+
+#: .\apps\theme\templates\account\email.html.py:65
+msgid "Add Email Address"
+msgstr "增加新的邮件地址"
+
+#: .\apps\theme\templates\account\email.html.py:70
+msgid "Add"
+msgstr "增加"
+
+#: .\apps\theme\templates\account\language_change.html.py:11
+msgid "This site can be used in your preferred language."
+msgstr "本网站可以使用你习惯的语言"
+
+#: .\apps\theme\templates\account\language_change.html.py:18
+msgid "Change my language"
+msgstr "修改你习惯显示的语言"
+
+#: .\apps\theme\templates\account\login.html.py:8
+#: .\apps\theme\templates\account\login.html.py:12
+msgid "Log In"
+msgstr "登录"
+
+#: .\apps\theme\templates\account\login.html.py:19
+#: .\apps\theme\templates\account\password_reset.html.py:13
+#: .\apps\theme\templates\account\password_reset_done.html.py:12
+msgid "Note"
+msgstr "提示"
+
+#: .\apps\theme\templates\account\login.html.py:20
+#: .\apps\theme\templates\account\password_reset.html.py:13
+#: .\apps\theme\templates\account\password_reset_done.html.py:12
+#, python-format
+msgid "you are already logged in as %(user_display)s."
+msgstr "%(user_display)s已经成功登录"
+
+#: .\apps\theme\templates\account\login.html.py:25
+#, python-format
+msgid "Don't have an account? <a href=\"%(signup_url)s\">Sign up</a>!"
+msgstr "没有帐户？<a href=\"%(signup_url)s\">注册一个</a>!"
+
+#: .\apps\theme\templates\account\login.html.py:28
+msgid "Forgot password?"
+msgstr "忘记密码?"
+
+#: .\apps\theme\templates\account\login.html.py:40
+#: .\apps\theme\templates\account\signup.html.py:17
+#: .\apps\theme\templates\django_openid\login.html.py:19
+msgid "Log in"
+msgstr "登录"
+
+#: .\apps\theme\templates\account\login.html.py:46
+#: .\apps\theme\templates\account\signup.html.py:33
+msgid "Or sign in with your Social network"
+msgstr "你可以使用以下社交网络直接登录"
+
+#: .\apps\theme\templates\account\login.html.py:53
+#: .\apps\theme\templates\django_openid\login.html.py:28
+#, python-format
+msgid ""
+"If you have any trouble logging in to your account, contact us at <a href="
+"\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgstr "注册或者登录有任何问题，请发送邮件至<a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+
+#: .\apps\theme\templates\account\logout.html.py:5
+msgid "Logged Out"
+msgstr "登出"
+
+#: .\apps\theme\templates\account\logout.html.py:8
+msgid "You've been logged out."
+msgstr "你已经成功登出"
+
+#: .\apps\theme\templates\account\password_change.html.py:16
+#: .\apps\theme\templates\account\password_reset_from_key.html.py:20
+msgid "Change password"
+msgstr "修改密码"
+
+#: .\apps\theme\templates\account\password_delete.html.py:10
+msgid ""
+"You may delete your password since you are currently logged in using OpenID."
+msgstr ""
+
+#: .\apps\theme\templates\account\password_delete.html.py:13
+msgid "Delete my password"
+msgstr "删除我的密码"
+
+#: .\apps\theme\templates\account\password_delete_done.html.py:5
+#: .\apps\theme\templates\account\password_delete_done.html.py:8
+msgid "Password Deleted"
+msgstr "密码成功删除"
+
+#: .\apps\theme\templates\account\password_delete_done.html.py:10
+msgid "Your password has been deleted."
+msgstr "你的密码已经被成功删除"
+
+#: .\apps\theme\templates\account\password_reset.html.py:7
+#: .\apps\theme\templates\account\password_reset.html.py:10
+#: .\apps\theme\templates\account\password_reset_done.html.py:6
+#: .\apps\theme\templates\account\password_reset_done.html.py:9
+msgid "Password Reset"
+msgstr "重置密码"
+
+#: .\apps\theme\templates\account\password_reset.html.py:16
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll send you "
+"an email allowing you to reset it."
+msgstr "忘记密码了?请输入你注册时绑定的邮箱，我们会发送重置密码邮件到你的邮箱。"
+
+#: .\apps\theme\templates\account\password_reset.html.py:23
+msgid "Reset my password"
+msgstr "重置我的密码"
+
+#: .\apps\theme\templates\account\password_reset.html.py:28
+#, python-format
+msgid ""
+"If you have any trouble resetting your password, contact us at <a href="
+"\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgstr "如果重围密码有任何问题，请发送邮件至<a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+
+#: .\apps\theme\templates\account\password_reset_done.html.py:15
+#, python-format
+msgid ""
+"We have sent you an email. If you do not receive it within a few minutes, "
+"contact us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgstr ""
+
+#: .\apps\theme\templates\account\password_reset_from_key.html.py:8
+msgid "Bad Token"
+msgstr ""
+
+#: .\apps\theme\templates\account\password_reset_from_key.html.py:12
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: .\apps\theme\templates\account\password_set.html.py:16
+msgid "Set password"
+msgstr ""
+
+#: .\apps\theme\templates\account\signup.html.py:7
+#: .\apps\theme\templates\account\signup.html.py:10
+msgid "Sign Up"
+msgstr ""
+
+#: .\apps\theme\templates\account\signup.html.py:15
+msgid "You are already logged in."
+msgstr ""
+
+#: .\apps\theme\templates\account\signup.html.py:17
+msgid "Already have an account?"
+msgstr ""
+
+#: .\apps\theme\templates\account\signup.html.py:27
+#: .\apps\theme\templates\django_openid\register.html.py:22
+msgid "Sign up"
+msgstr ""
+
+#: .\apps\theme\templates\account\signup.html.py:41
+#: .\apps\theme\templates\django_openid\register.html.py:32
+#, python-format
+msgid ""
+"If you have any trouble creating your account, contact us at <a href="
+"\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
+msgstr ""
+
+#: .\apps\theme\templates\account\social_relationship.html.py:6
+#: .\apps\theme\templates\account\social_relationship.html.py:9
+msgid "Social Relationship"
+msgstr ""
+
+#: .\apps\theme\templates\account\social_relationship.html.py:11
+msgid "Associated"
+msgstr ""
+
+#: .\apps\theme\templates\account\social_relationship.html.py:14
+msgid "Disconnect"
+msgstr ""
+
+#: .\apps\theme\templates\account\social_relationship.html.py:19
+msgid "Not associated"
+msgstr ""
+
+#: .\apps\theme\templates\account\timezone_change.html.py:11
+msgid ""
+"This site can localize all times into your preferred timezone. Change your "
+"timezone below."
+msgstr ""
+
+#: .\apps\theme\templates\account\timezone_change.html.py:18
+msgid "Change my timezone"
+msgstr ""
+
+#: .\apps\theme\templates\account\verification_sent.html.py:5
+#: .\apps\theme\templates\account\verification_sent.html.py:8
+msgid "Verify your email address"
+msgstr ""
+
+#: .\apps\theme\templates\account\verification_sent.html.py:14
+#, python-format
+msgid ""
+"We have sent you an email to <b>%(email)s</b> for verification. Follow the "
+"link provided to finalize the signup process. If you do not receive it "
+"within a few minutes, contact us at <a href=\"mailto:%(CONTACT_EMAIL)s\">%"
+"(CONTACT_EMAIL)s</a> or <a href=\"#\" onclick=\"$('#send_verification')."
+"submit();\">Re-send verification email</a>."
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\already_logged_in.html.py:5
+#: .\apps\theme\templates\django_openid\already_logged_in.html.py:8
+msgid "Already logged in"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\already_logged_in.html.py:10
+#, python-format
+msgid ""
+"You are already logged into the site. To login with a different OpenID "
+"please <a href=\"/openid/logout/?next=%(url_acct_logout)s\">logout</a> first."
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\associate.html.py:6
+#: .\apps\theme\templates\django_openid\associate.html.py:9
+msgid "Verify this Association"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\associations.html.py:8
+msgid "Manage OpenID Associations"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\associations.html.py:12
+#, python-format
+msgid ""
+"You have not set a password for this user account. You are unable to remove "
+"OpenID associations until you <a href=\"%(acct_passwd_set_url)s\">set a "
+"password</a>."
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\associations.html.py:16
+#, python-format
+msgid ""
+"Your account is currently associated with the following OpenID %(buttons)s:"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\associations.html.py:26
+msgid "remove"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\associations.html.py:33
+msgid "To associate a new OpenID with this account, sign in with it here:"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\associations.html.py:46
+msgid "Authenticate and associate with this account"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\error.html.py:5
+#: .\apps\theme\templates\django_openid\error.html.py:8
+msgid "Error using OpenID"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\login.html.py:8
+msgid "Login"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\login.html.py:12
+msgid "Log In to OpenID"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\register.html.py:6
+#: .\apps\theme\templates\django_openid\register.html.py:9
+msgid "Choose a Username"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\register.html.py:12
+msgid "Please correct the errors below:"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\register.html.py:15
+msgid ""
+"Now that you have logged in with your OpenID, we need you to choose a "
+"username for this site."
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\register.html.py:30
+#, python-format
+msgid ""
+"<strong>Already have an account?</strong> <a href=\"%(acct_login_openid_url)s"
+"\">Log in</a> to associate your OpenID with your existing account."
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\register.html.py:31
+#, python-format
+msgid ""
+"By clicking &quot;Sign Up&quot;, you are indicating that you have read and "
+"agree to the <a href=\"%(terms_url)s\">Terms of Use</a> and <a href=\"%"
+"(privacy_url)s\">Privacy Policy</a>."
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\registration_closed.html.py:5
+#: .\apps\theme\templates\django_openid\registration_closed.html.py:8
+msgid "Signup closed"
+msgstr ""
+
+#: .\apps\theme\templates\django_openid\registration_closed.html.py:10
+msgid ""
+"Whoops, you can't register for an account now. This site is currently closed "
+"for sign-up."
+msgstr ""
+
+#: .\apps\theme\templates\emailconfirmation\confirm_email.html.py:6
+msgid "Confirm Email"
+msgstr ""
+
+#: .\apps\theme\templates\emailconfirmation\confirm_email.html.py:10
+msgid "Email Confirmed"
+msgstr ""
+
+#: .\apps\theme\templates\emailconfirmation\confirm_email.html.py:12
+#, python-format
+msgid ""
+"You have confirmed that %(email)s is an email address for user '%"
+"(user_display)s'."
+msgstr ""
+
+#: .\apps\theme\templates\emailconfirmation\confirm_email.html.py:14
+msgid "Invalid confirmation key."
+msgstr ""
+
+#: .\apps\theme\templates\idios\base.html.py:10
+msgid "Profile"
+msgstr ""
+
+#: .\apps\theme\templates\idios\base.html.py:11
+msgid "Your Profile"
+msgstr ""
+
+#: .\apps\theme\templates\idios\base.html.py:12
+#: .\apps\theme\templates\idios\profiles.html.py:7
+#: .\apps\theme\templates\idios\profiles.html.py:10
+msgid "All Profiles"
+msgstr ""
+
+#: .\apps\theme\templates\idios\profile.html.py:6
+#: .\apps\theme\templates\idios\profile.html.py:11
+#, python-format
+msgid "Profile for %(page_user_display)s"
+msgstr ""
+
+#: .\apps\theme\templates\idios\profile_edit.html.py:5
+#: .\apps\theme\templates\idios\profile_edit.html.py:9
+#: .\apps\theme\templates\idios\profile_edit_ajax.html.py:5
+msgid "Edit Profile"
+msgstr ""
+
+#: .\apps\theme\templates\idios\profile_edit_ajax_success.html.py:4
+msgid "Success!"
+msgstr ""
+
+#: .\apps\theme\templates\notification\base.html.py:13
+#: .\apps\theme\templates\notification\base.html.py:14
+#: .\apps\theme\templates\notification\notices.html.py:8
+msgid "Notices"
+msgstr ""
+
+#: .\apps\theme\templates\notification\base.html.py:15
+#: .\apps\theme\templates\notification\notice_settings.html.py:9
+msgid "Settings"
+msgstr ""
+
+#: .\apps\theme\templates\notification\notice_settings.html.py:6
+msgid "Notification Settings"
+msgstr ""
+
+#: .\apps\theme\templates\notification\notice_settings.html.py:15
+msgid "Primary email"
+msgstr ""
+
+#: .\apps\theme\templates\notification\notice_settings.html.py:17
+#, python-format
+msgid "change under <a href=\"%(email_url)s\">Account</a>"
+msgstr ""
+
+#: .\apps\theme\templates\notification\notice_settings.html.py:21
+#, python-format
+msgid ""
+"\n"
+"                You do not have a verified email address to which notices "
+"can be sent.\n"
+"                You can add one by going to <a href=\"%(email_url)s"
+"\">Account</a>.\n"
+"                "
+msgstr ""
+
+#: .\apps\theme\templates\notification\notice_settings.html.py:32
+msgid "Notification Type"
+msgstr ""
+
+#: .\apps\theme\templates\notification\notice_settings.html.py:50
+msgid "Change"
+msgstr ""
+
+#: .\apps\theme\templates\notification\notices.html.py:15
+msgid "Mark all unseen notices seen"
+msgstr ""
+
+#: .\apps\theme\templates\notification\notices.html.py:21
+msgid "MONTH_DAY_FORMAT"
+msgstr ""
+
+#: .\apps\theme\templates\notification\notices.html.py:39
+msgid "No notices."
+msgstr ""
+
+#: .\apps\theme\templates\pagination\pagination.html.py:8
+#: .\apps\theme\templates\pagination\pagination.html.py:11
+msgid "Previous"
+msgstr ""
+
+#: .\apps\theme\templates\pagination\pagination.html.py:21
+#: .\apps\theme\templates\pagination\pagination.html.py:23
+msgid "Next"
+msgstr ""
+
+#: .\apps\theme\templates\signup_codes\admin_invite_user.html.py:8
+msgid ""
+"Invite a user given an e-mail address. The user will be e-mailed a signup "
+"code to create their account on this website."
+msgstr ""
+
+#: .\apps\theme\templates\signup_codes\failure.html.py:5
+#: .\apps\theme\templates\signup_codes\failure.html.py:8
+msgid "Incorrect Code"
+msgstr ""
+
+#: .\apps\theme\templates\signup_codes\failure.html.py:11
+#, python-format
+msgid "The code <b>%(code)s</b> is incorrect."
+msgstr ""
+
+#: .\apps\theme\templates\signup_codes\failure.html.py:13
+msgid "You must specify a code."
+msgstr ""
+
+#: .\apps\theme\templates\signup_codes\failure.html.py:16
+msgid "Try again:"
+msgstr ""
+
+#: .\apps\theme\templates\waitinglist\list_signup.html.py:6
+#: .\apps\theme\templates\waitinglist\success.html.py:5
+msgid "Welcome"
+msgstr ""
+
+#: .\apps\theme\templates\waitinglist\list_signup.html.py:10
+msgid "Sign up for the waiting list"
+msgstr ""
+
+#: .\apps\theme\templates\waitinglist\list_signup.html.py:12
+msgid "Give us your email address and you'll be added to the waiting list"
+msgstr ""
+
+#: .\templates\500.html.py:7
+msgid ""
+"We're sorry but a server error has occurred. Please contact our "
+"administrator for help."
+msgstr ""
+
+#: .\templates\_footer.html.py:4 .\templates\about\about.html.py:4
+msgid "About"
+msgstr ""
+
+#: .\templates\_footer.html.py:5
+msgid "Blog"
+msgstr ""
+
+#: .\templates\_footer.html.py:7
+msgid "Contact me"
+msgstr ""
+
+#: .\templates\_footer.html.py:10
+msgid "&copy; 2012 golettoo@gmail.com"
+msgstr ""
+
+#: .\templates\about\about.html.py:9
+msgid "About cool bookmark"
+msgstr ""
+
+#: .\templates\about\privacy.html.py:4
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\templates\about\terms.html.py:4
+msgid "Terms of Service"
+msgstr ""
+
+#: .\templates\about\what_next.html.py:6 .\templates\about\what_next.html.py:9
+msgid "What Next?"
+msgstr ""
+
+#: .\templates\about\what_next.html.py:32
+#, python-format
+msgid ""
+"Start by <a href=\"%(signup_url)s\">signing up</a> and <a href=\"%(login_url)"
+"s\">logging in</a>."
+msgstr ""
+
+#: .\templates\about\what_next.html.py:34
+#, python-format
+msgid "Start by <a href=\"%(login_url)s\">logging in</a>."
+msgstr ""
