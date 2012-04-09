@@ -3,4 +3,5 @@
 dev.db
 env/*
 webapp/local_settings.py
+webapp/social_auth_settings.py
 .DS_Store

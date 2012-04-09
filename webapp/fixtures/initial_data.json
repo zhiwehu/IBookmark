@@ -3,8 +3,8 @@
         "pk": 1, 
         "model": "sites.site", 
         "fields": {
-            "domain": "coolbookmark.com",
-            "name": "Cool Bookmark"
+            "domain": "ibookmark.me",
+            "name": "IBookmark"
         }
     }
 ]
