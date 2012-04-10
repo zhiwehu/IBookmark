@@ -7,7 +7,7 @@ import utils
 from models import Bookmark, BookmarkUrl
 from threading import Timer
 #second
-t = 300
+t = 7200
 
 def cronjob():
     def update_bk_image():
