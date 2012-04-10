@@ -9,3 +9,5 @@ urlpatterns = patterns('',
     url(r'^/tag/my/$', 'bookmark.views.my_tag', name='my_tag'),
     url(r'^/tag/$', 'bookmark.views.tag', name='tag')
 )
+
+import cron

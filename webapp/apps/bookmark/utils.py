@@ -1,4 +1,14 @@
-from models import Bookmark
+import urllib
+
+def get_image_by_url(url):
+    image = None
+    try:
+        image = urllib.urlretrieve('http://api.thumbalizr.com/?width=240&url=' + url)
+        return image[0]
+    except Exception as error:
+        pass
+
+    return image
 
 def get_tag(line):
     result = None
