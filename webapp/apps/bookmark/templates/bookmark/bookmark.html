@@ -25,8 +25,14 @@
     <script id="bookmark_screen_shot" type="text/x-jquery-tmpl">
         <li class="span3">
             <div class="thumbnail">
-                <a href="${url}" target="_blank"><img src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}"></a>
-                <h5>${title}</h5>
+                <a href="${url}" target="_blank">
+                    {% templatetag openvariable %}if screen_shot == ""{% templatetag closevariable %}
+                    <img width="256" height="192" src="http://placehold.it/256x192" alt="${url}" title="${url}">
+                    {% templatetag openvariable %}else{% templatetag closevariable %}
+                    <img width="256" height="192" src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}">
+                    {% templatetag openvariable %}/if{% templatetag closevariable %}
+                </a>
+                <h5>{% trans "Title" %} : ${title}</h5>
                 <p> {% trans "Tags" %} :
                     {% templatetag openvariable %}each(i, tag) tags{% templatetag closevariable %}
                     <a class="tag" href="{% url api_bookmarks %}?tag=${tag.id}"><span
