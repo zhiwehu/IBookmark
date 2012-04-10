@@ -18,7 +18,7 @@ def cronjob():
             url = bookmark.url
             image = utils.get_image_by_url(url)
             if image:
-                image_file_name = str(uuid.uuid1())
+                image_file_name = str(uuid.uuid1()) + ".jpg"
                 bookmark.screen_shot.save(image_file_name, ContentFile(image))
                 bookmark.save()
 

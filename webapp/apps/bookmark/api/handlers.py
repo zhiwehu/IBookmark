@@ -67,6 +67,7 @@ class MyBookmarkHandler(BaseHandler):
     fields = ('id',
               ('owner', ('id', 'username',)),
               'title',
+              'screen_shot',
               'url',
               ('tags', ('id', 'name',)),
               'public',

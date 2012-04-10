@@ -3,10 +3,12 @@ import urllib
 def get_image_by_url(url):
     image = None
     try:
-        image = urllib.urlretrieve('http://api.thumbalizr.com/?width=240&url=' + url)
-        return image[0]
+        fp = urllib.URLopener().open('http://api1.thumbalizr.com/?width=240&url=' + url)
+        image = fp.read()
     except Exception as error:
         pass
+    finally:
+        fp.close()
 
     return image
 
