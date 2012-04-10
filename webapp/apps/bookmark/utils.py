@@ -4,7 +4,7 @@ def get_image_by_url(url):
     image = None
     fp = None
     try:
-        request = urllib2.Request('http://www.robothumb.com/src/?size=320x240&url=' + url)
+        request = urllib2.Request('http://api.snapito.com/free/sc?url=' + url)
         opener = urllib2.build_opener(SmartRedirectHandler())
         fp = opener.open(request)
         image = fp.read()
