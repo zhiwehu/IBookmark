@@ -4,7 +4,7 @@ def get_image_by_url(url):
     image = None
     fp = None
     try:
-        fp = urllib.URLopener().open('http://api.snapito.com/free/sc?url=' + url)
+        fp = urllib.URLopener().open('http://www.robothumb.com/src/?size=320x240&url=' + url)
         image = fp.read()
     except Exception as error:
         pass
