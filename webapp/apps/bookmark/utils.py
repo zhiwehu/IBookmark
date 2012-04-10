@@ -1,10 +1,12 @@
-import urllib
+import urllib2
 
 def get_image_by_url(url):
     image = None
     fp = None
     try:
-        fp = urllib.URLopener().open('http://www.robothumb.com/src/?size=320x240&url=' + url)
+        request = urllib2.Request('http://www.robothumb.com/src/?size=320x240&url=' + url)
+        opener = urllib2.build_opener(SmartRedirectHandler())
+        fp = opener.open(request)
         image = fp.read()
     except Exception as error:
         pass
@@ -88,3 +90,15 @@ def parse_firefox_bookmark(file):
 
 #print parse_firefox_bookmark(open('bookmarks.html', 'r'))
 
+class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
+    def http_error_301(self, req, fp, code, msg, headers):
+        result = urllib2.HTTPRedirectHandler.http_error_301(
+            self, req, fp, code, msg, headers)
+        result.status = code
+        return result
+
+    def http_error_302(self, req, fp, code, msg, headers):
+        result = urllib2.HTTPRedirectHandler.http_error_302(
+            self, req, fp, code, msg, headers)
+        result.status = code
+        return result
