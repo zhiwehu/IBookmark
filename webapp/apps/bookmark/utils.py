@@ -2,13 +2,15 @@ import urllib
 
 def get_image_by_url(url):
     image = None
+    fp = None
     try:
-        fp = urllib.URLopener().open('http://api1.thumbalizr.com/?width=240&url=' + url)
+        fp = urllib.URLopener().open('http://api.snapito.com/free/sc?url=' + url)
         image = fp.read()
     except Exception as error:
         pass
     finally:
-        fp.close()
+        if fp:
+            fp.close()
 
     return image
 
