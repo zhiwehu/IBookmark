@@ -1,3 +1,4 @@
+import threading
 import urllib2
 import uuid
 from django.core.files.base import ContentFile
@@ -116,3 +117,14 @@ def update_bk_screen_shot(bookmark):
             pass
         bookmark.screen_shot.save(image_file_name, ContentFile(image))
         bookmark.save()
+
+class BookmarkThread(threading.Thread):
+    def __init__(self, bookmark):
+        self.bookmark = bookmark
+        threading.Thread.__init__(self)
+
+    def run(self):
+        update_bk_screen_shot(self.bookmark)
+
+def update_bk_screen_shot_async(bookmark):
+    BookmarkThread(bookmark).start()

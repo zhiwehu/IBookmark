@@ -21,7 +21,6 @@ from taggit.models import Tag
 from bookmark.forms import BookmarkForm
 from bookmark.models import Bookmark
 from bookmark import utils
-#import message
 
 def get_data(bookmarks, request):
     # Get tag
@@ -123,8 +122,7 @@ class BookmarkHandler(BaseHandler):
         bookmark.save()
         form.save_m2m()
 
-        # publish a message
-        #message.pub('update_bk_screen_shot', bookmark)
+        utils.update_bk_screen_shot_async(bookmark)
 
         return bookmark
 
@@ -138,8 +136,8 @@ class BookmarkHandler(BaseHandler):
             form.save()
 
             # update screen shot
-            #if oldUrl != bookmark.url:
-            #    message.pub('update_bk_screen_shot', bookmark)
+            if oldUrl != bookmark.url:
+                utils.update_bk_screen_shot_async(bookmark)
 
             return bookmark
         except ObjectDoesNotExist:
