@@ -13,6 +13,12 @@
                     <i class="icon-user"></i>&nbsp;{% trans "My Bookmarks" %}
                 </a>
             </li>
+        {% else %}
+            <li>
+                <a href="{% url acct_signup %}">
+                    <b>{% trans "Free bookmark" %}</b>
+                </a>
+            </li>
         {% endif %}
     </ul>
 </div>
