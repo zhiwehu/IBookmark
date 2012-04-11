@@ -243,6 +243,26 @@
     }
 
     $(function () {
+        // fix sub nav on scroll
+        var $win = $(window)
+                , $nav = $('.subnav')
+                , navTop = $('.subnav').length && $('.subnav').offset().top - 40
+                , isFixed = 0
+
+        processScroll()
+
+        $win.on('scroll', processScroll)
+
+        function processScroll() {
+            var i, scrollTop = $win.scrollTop()
+            if (scrollTop >= navTop && !isFixed) {
+                isFixed = 1
+                $nav.addClass('subnav-fixed')
+            } else if (scrollTop <= navTop && isFixed) {
+                isFixed = 0
+                $nav.removeClass('subnav-fixed')
+            }
+        }
 
         $("#bookmarks_table")
                 .ajaxStart(function () {
@@ -333,7 +353,8 @@
 
 {% block body %}
 
-    <p>
+    <p></p>
+    <div class="btn-group">
         <a href="#" id="add_bookmark_btn" class="btn btn-info">
         <i class="icon-plus icon-white"></i>
         {% trans "Add bookmark" %}
@@ -350,7 +371,7 @@
             <i class="icon-trash icon-white"></i>
             {% trans "Empty" %}
         </a>
-    </p>
+    </div>
 
     <table id="bookmarks_table" class="table table-striped table-bordered datatable">
         <thead>
@@ -402,6 +423,7 @@
 {% endblock %}
 
 {% block subnav %}
+    <p></p>
     <div class="alert alert-info">
         <h3>{% trans "My tags" %}</h3>
         <div id="my_tags">
