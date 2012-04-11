@@ -20,6 +20,8 @@ from django.db.models.query_utils import Q
 from taggit.models import Tag
 from bookmark.forms import BookmarkForm
 from bookmark.models import Bookmark
+from bookmark import utils
+#import message
 
 def get_data(bookmarks, request):
     # Get tag
@@ -120,6 +122,10 @@ class BookmarkHandler(BaseHandler):
         bookmark.owner = request.user
         bookmark.save()
         form.save_m2m()
+
+        # publish a message
+        #message.pub('update_bk_screen_shot', bookmark)
+
         return bookmark
 
     @validate(BookmarkForm)
@@ -127,8 +133,14 @@ class BookmarkHandler(BaseHandler):
         # Get bookmark first, if not return NOT_FOUND
         try:
             bookmark = Bookmark.objects.get(pk = int(bookmark_id), owner=request.user)
+            oldUrl = bookmark.url
             form = BookmarkForm(request.PUT, instance=bookmark)
             form.save()
+
+            # update screen shot
+            #if oldUrl != bookmark.url:
+            #    message.pub('update_bk_screen_shot', bookmark)
+
             return bookmark
         except ObjectDoesNotExist:
             return rc.NOT_FOUND

@@ -1,4 +1,6 @@
 from django.conf.urls.defaults import patterns, url
+#import message
+#from utils import update_bk_screen_shot
 
 urlpatterns = patterns('',
     url(r'^/my/import/$', 'bookmark.views.import_bookmark', name='import_bookmark'),
@@ -9,5 +11,7 @@ urlpatterns = patterns('',
     url(r'^/tag/my/$', 'bookmark.views.my_tag', name='my_tag'),
     url(r'^/tag/$', 'bookmark.views.tag', name='tag')
 )
+
+#message.sub('update_bk_screen_shot', update_bk_screen_shot)
 
 import cron

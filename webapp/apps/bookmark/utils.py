@@ -1,4 +1,7 @@
 import urllib2
+import uuid
+from django.core.files.base import ContentFile
+import os
 
 def get_image_by_url(url):
     image = None
@@ -102,3 +105,14 @@ class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
             self, req, fp, code, msg, headers)
         result.status = code
         return result
+
+def update_bk_screen_shot(bookmark):
+    image = get_image_by_url(bookmark.url)
+    if image:
+        image_file_name = str(uuid.uuid1()) + ".png"
+        try:
+            os.remove(bookmark.screen_shot.path)
+        except:
+            pass
+        bookmark.screen_shot.save(image_file_name, ContentFile(image))
+        bookmark.save()
