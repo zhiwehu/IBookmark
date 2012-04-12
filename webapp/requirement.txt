@@ -7,3 +7,4 @@ django-social-auth
 django-taggit
 pil
 django-piston
+BeautifulSoup

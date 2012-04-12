@@ -3,6 +3,16 @@ import urllib2
 import uuid
 from django.core.files.base import ContentFile
 import os
+import BeautifulSoup
+
+def get_title_by_url(url):
+    title = None
+    try:
+        html = BeautifulSoup.BeautifulSoup(urllib2.urlopen(url))
+        title = html.title.string.strip()
+    except:
+        pass
+    return title
 
 def get_image_by_url(url):
     image = None

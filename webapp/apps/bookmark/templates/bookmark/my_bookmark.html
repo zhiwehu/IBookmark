@@ -405,13 +405,16 @@
 
                 <h3>{% trans "Add bookmark" %}</h3>
             </div>
-            <div id="bookmark_form_error"></div>
+
             <div class="modal-body">
+                <div class="alert alert-info">
+                    {% trans "You can just input the url, ibookmark will get the title for you. Or you can input by yourself." %}
+                </div>
                 <input id="add_edit" type="hidden" value="add"/>
                 <input id="api_url" type="hidden" value="{% url api_bookmarks %}"/>
                 {% csrf_token %}
                 <fieldset>
-                    {{ form|as_bootstrap }}
+                    {{ form|as_bootstrap:"display_required=True" }}
                 </fieldset>
             </div>
             <div class="modal-footer">

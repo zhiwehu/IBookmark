@@ -119,6 +119,8 @@ class BookmarkHandler(BaseHandler):
         form = request.form
         bookmark = form.save(commit=False)
         bookmark.owner = request.user
+        if not bookmark.title:
+            bookmark.title = utils.get_title_by_url(bookmark.url)
         bookmark.save()
         form.save_m2m()
 
@@ -133,7 +135,11 @@ class BookmarkHandler(BaseHandler):
             bookmark = Bookmark.objects.get(pk = int(bookmark_id), owner=request.user)
             oldUrl = bookmark.url
             form = BookmarkForm(request.PUT, instance=bookmark)
-            form.save()
+            bookmark = form.save()
+
+            if not bookmark.title:
+                bookmark.title = utils.get_title_by_url(bookmark.url)
+                bookmark.save()
 
             # update screen shot
             if oldUrl != bookmark.url:
