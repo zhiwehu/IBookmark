@@ -34,6 +34,13 @@
                     {% templatetag openvariable %}/if{% templatetag closevariable %}
                 </a>
                 <h5>{% trans "Title" %} : ${title}</h5>
+                <p>{% trans "Public" %} :
+                    {% templatetag openvariable %}if public{% templatetag closevariable %}
+                    <span class="label label-success"><i class="icon-ok icon-white"></i></span>
+                    {% templatetag openvariable %}else{% templatetag closevariable %}
+                    <span class="label"><i class="icon-remove icon-white"></i></span>
+                    {% templatetag openvariable %}/if{% templatetag closevariable %}
+                </p>
                 <p> {% trans "Tags" %} :
                     {% templatetag openvariable %}each(i, tag) tags{% templatetag closevariable %}
                     <a class="tag" href="{% url api_bookmarks %}?tag=${tag.id}"><span
@@ -410,11 +417,19 @@
         });
 
         $("#show_bookmarks_list").click(function() {
+            if (!$(this).hasClass("active")) {
+            $(this).addClass("active");
+            $("#show_bookmarks_grid").removeClass("active");
             render_bookmark_list_grid();
+            }
         });
 
         $("#show_bookmarks_grid").click(function() {
+            if (!$(this).hasClass("active")) {
+            $(this).toggleClass("active");
+            $("#show_bookmarks_list").toggleClass("active");
             render_bookmark_list_grid();
+            }
         });
 
     });
@@ -442,9 +457,9 @@
                 {% trans "Empty" %}
             </a>
         </div>
-        <div id="show_bookmarks" class="btn-group" data-toggle="buttons-radio">
-            <button id="show_bookmarks_list" class="btn btn-success active"><i class="icon-th-list icon-white"></i> {% trans "List" %}</button>
-            <button id="show_bookmarks_grid" class="btn btn-success"><i class="icon-th icon-white"></i> {% trans "Grid" %}</button>
+        <div id="show_bookmarks" class="btn-group">
+            <button id="show_bookmarks_list" class="btn btn-info active"><i class="icon-th-list icon-white"></i> {% trans "List" %}</button>
+            <button id="show_bookmarks_grid" class="btn btn-info"><i class="icon-th icon-white"></i> {% trans "Grid" %}</button>
         </div>
     </div>
 
