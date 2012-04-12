@@ -10,7 +10,7 @@ def cronjob():
         bookmarks = Bookmark.objects.all()
         for bookmark in bookmarks:
             if bookmark.screen_shot:
-                break
+                continue
             utils.update_bk_screen_shot_async(bookmark)
 
     update_bk_image()
