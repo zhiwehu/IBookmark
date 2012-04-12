@@ -13,5 +13,5 @@ def account(request):
         account = AnonymousAccount(request)
     return {
         "account": account,
-        "CONTACT_EMAIL": getattr(settings, "CONTACT_EMAIL", "golettoo@gmail.com")
+        "CONTACT_EMAIL": getattr(settings, "CONTACT_EMAIL", "admin@ibookmark.me")
     }
