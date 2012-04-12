@@ -232,6 +232,7 @@
                     $("#bookmark_form_modal").modal("hide");
                     // Render data to table
                     init_pagination();
+                    render_tag();
                 }
             },
             error:function (xmlHttpRequest, textStatus, errorThrown) {
@@ -294,6 +295,7 @@
                         window.location.href = data.redirect;
                     }
                     init_pagination();
+                    render_tag();
                 },
                 error:function (xmlHttpRequest, textStatus, errorThrown) {
                     alert(xmlHttpRequest.responseText);
