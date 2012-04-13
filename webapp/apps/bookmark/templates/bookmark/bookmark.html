@@ -29,7 +29,7 @@
                     {% templatetag openvariable %}if screen_shot == ""{% templatetag closevariable %}
                     <img src="http://placehold.it/256x192" alt="${url}" title="${url}">
                     {% templatetag openvariable %}else{% templatetag closevariable %}
-                    <img src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}">
+                    <img width="256" height="192" src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}">
                     {% templatetag openvariable %}/if{% templatetag closevariable %}
                 </a>
                 <h5>{% trans "Title" %} : ${title}</h5>
