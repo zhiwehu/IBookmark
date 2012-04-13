@@ -18,7 +18,8 @@ def get_image_by_url(url):
     image = None
     fp = None
     try:
-        request = urllib2.Request('http://api.snapito.com/free/sc?url=' + url)
+        #request = urllib2.Request('http://api.snapito.com/free/sc?url=' + url)
+        request = urllib2.Request('http://api.snapito.com/web/1958c07f5c68ec902e8ae368b4691f3511c7a5bb/sc?url=' + url)
         opener = urllib2.build_opener(SmartRedirectHandler())
         fp = opener.open(request)
         image = fp.read()
