@@ -52,7 +52,7 @@ def get_data(bookmarks, request):
 
     keyword = request.GET.get('keyword', '')
     if keyword:
-        bookmarks = bookmarks.filter(title__contains=keyword)
+        bookmarks = bookmarks.filter(Q(title__contains=keyword) | Q(url__contains=keyword))
 
     # Get total records.
     total_count = bookmarks.count()
