@@ -12,7 +12,7 @@ from forms import BookmarkForm, FileForm
 from taggit.models import Tag
 from taggit.utils import parse_tags
 from models import Bookmark
-from utils import parse_firefox_bookmark
+from utils import parse_firefox_bookmark, update_bk_screen_shot_async
 
 def bookmark(request, template_name='bookmark/bookmark.html'):
     form = BookmarkForm()
@@ -35,29 +35,6 @@ def delete_all_bookmarks(request):
     bookmarks = Bookmark.objects.filter(owner=request.user).delete()
     return HttpResponseRedirect(reverse('my_bookmark'))
 
-'''
-@login_required()
-def import_bookmark(request, template_name='bookmark/import_bookmark.html'):
-    file_form = FileForm(request.POST or None, request.FILES or None)
-    if request.method == 'POST' and file_form.is_valid():
-        file = request.FILES['file']
-        try:
-            bookmarks = BookmarkCsvModel.import_data(data=file)
-            for bk in bookmarks:
-                bookmark = Bookmark.objects.create(url=bk.url, title=bk.title, owner=request.user)
-                tags=parse_tags(bk.tags)
-                for tag in tags:
-                    bookmark.tags.add(tag)
-            return HttpResponseRedirect(reverse("my_bookmark"))
-        except Exception, e:
-            file_form._errors[NON_FIELD_ERRORS] = ErrorList([e.message])
-
-    return render_to_response(template_name, RequestContext(request, {
-        'file_form': file_form,
-        'active': 'my_bookmark'
-    }))
-'''
-
 @login_required()
 def import_bookmark(request, template_name='bookmark/import_bookmark.html'):
     file_form = FileForm(request.POST or None, request.FILES or None)
@@ -76,6 +53,8 @@ def import_bookmark(request, template_name='bookmark/import_bookmark.html'):
                         tags=parse_tags(bk['tags'])
                     for tag in tags:
                         bookmark.tags.add(tag)
+                    # Update the screen shot
+                    update_bk_screen_shot_async(bookmark)
                 except Exception:
                     pass
             return HttpResponseRedirect(reverse("my_bookmark"))
