@@ -101,12 +101,12 @@
             }
 
             // Add loading
-            $("body")
+            $("#main_page")
                     .ajaxStart(function () {
-                        $("body").mask("{% trans 'Loading...' %}")
+                        $(this).mask("{% trans 'Loading...' %}")
                     })
                     .ajaxComplete(function () {
-                        $("body").unmask();
+                        $(this).unmask();
                     });
 
             render_bookmark(30);
@@ -138,6 +138,7 @@
 {% endblock %}
 
 {% block body %}
+    <div id="main_page">
     {% include "bookmark/_menu.html" %}
     {% if not request.user.is_authenticated %}
     <div class="alert alert-block alert-info">
@@ -158,5 +159,6 @@
     <ul id="bookmark_screen_shots" class="thumbnails">
 
     </ul>
+    </div>
 {% endblock %}
 

@@ -344,7 +344,7 @@
             }
         }
 
-        $("#bookmarks_table")
+        $("#main_page")
                 .ajaxStart(function () {
                     $(this).mask("{% trans 'Loading...' %}")
                 })
@@ -456,7 +456,7 @@
 {% endblock %}
 
 {% block body %}
-
+    <div id="main_page">
     <div class="btn-toolbar">
         <div class="btn-group">
             <a href="#" id="add_bookmark_btn" class="btn btn-info">
@@ -535,6 +535,7 @@
                 <button id="btn_add_bookmark" class="btn btn-large btn-primary">{% trans "Submit" %}</button>
             </div>
         </form>
+    </div>
     </div>
 {% endblock %}
 
