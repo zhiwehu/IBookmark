@@ -24,8 +24,12 @@ from bookmark import utils
 
 def get_data(bookmarks, request):
     # Get tag
-    tag_id = int(request.GET.get('tag', 0))
-    if tag_id:
+    try:
+        tag_id = int(request.GET.get('tag', 0))
+    except:
+        tag_id = 0
+
+    if tag_id > 0:
         try:
             tag = Tag.objects.get(pk=tag_id)
             bookmarks = bookmarks.filter(tags__name__in=[tag.name])
@@ -34,7 +38,10 @@ def get_data(bookmarks, request):
             bookmarks = bookmarks.none()
 
     # Get owner
-    owner_id = int(request.GET.get('owner_id', 0))
+    try:
+        owner_id = int(request.GET.get('owner_id', 0))
+    except:
+        owner_id = 0
     if owner_id > 0:
         try:
             owner = User.objects.get(id=owner_id)
@@ -42,6 +49,10 @@ def get_data(bookmarks, request):
         except ObjectDoesNotExist:
             # The tag does not exist, return none
             bookmarks = bookmarks.none()
+
+    keyword = request.GET.get('keyword', '')
+    if keyword:
+        bookmarks = bookmarks.filter(title__contains=keyword)
 
     # Get total records.
     total_count = bookmarks.count()

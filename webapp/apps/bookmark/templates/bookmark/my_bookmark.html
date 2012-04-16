@@ -444,6 +444,13 @@
             }
         });
 
+        // submit data to create bookmark
+        $("#search_form").submit(function () {
+            api_url = update_parameter(api_url, "keyword", $("#keyword").val());
+            init_pagination();
+            return false;
+        });
+
     });
     </script>
 {% endblock %}

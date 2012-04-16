@@ -126,6 +126,13 @@
                 render_bookmark(30);
                 return false;
             });
+
+            // submit data to create bookmark
+            $("#search_form").submit(function () {
+                api_url = update_parameter(api_url, "keyword", $("#keyword").val());
+                render_bookmark(30);
+                return false;
+            });
         });
     </script>
 {% endblock %}

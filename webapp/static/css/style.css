@@ -168,3 +168,9 @@ body {
     background-repeat: no-repeat;
     background-position: 8px;
 }
+
+.search-element {
+    margin-bottom: 4px;
+    margin-right: 10px;
+    margin-top: 4px;
+}
