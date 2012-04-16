@@ -103,10 +103,10 @@
             // Add loading
             $("body")
                     .ajaxStart(function () {
-                        $(this).mask("{% trans 'Loading...' %}")
+                        $("body").mask("{% trans 'Loading...' %}")
                     })
                     .ajaxComplete(function () {
-                        $(this).unmask();
+                        $("body").unmask();
                     });
 
             render_bookmark(30);
