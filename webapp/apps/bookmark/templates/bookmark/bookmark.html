@@ -71,6 +71,7 @@
                         $("#bookmark_screen_shot").tmpl(bookmarks.data).appendTo("#bookmark_screen_shots");
                     } else {
                         $("#bookmark_screen_shots").empty();
+                        $("#bookmark_screen_shots").html('<li>{% trans "No Data" %}</li>');
                     }
                 },
                 dataType:"json"
