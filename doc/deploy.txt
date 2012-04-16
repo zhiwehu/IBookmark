@@ -6,10 +6,10 @@ sudo yum install gcc python-devel git httpd mod_wsgi mod_ssl mysql mysql-server 
 sudo easy_install virtualenv
 
 # Clone project
-git clone git://github.com/zhiweihu/cbk.git
+git clone git://github.com/zhiweihu/IBookmark.git
 
 # Build virtualenv
-cd cbk
+cd IBookmark
 virtualenv env
 source env/bin/activate
 pip install -r webapp/requirement.txt
@@ -24,8 +24,8 @@ default-character-set=utf8
 sudo service mysqld start
 sudo mysqladmin -u root password xxxxxxxx
 mysql -u root -p
-mysql> CREATE DATABASE cbk CHARACTER SET utf8;
-mysql> GRANT ALL PRIVILEGES ON cbk.* TO "cbkuser"@"localhost" IDENTIFIED BY "xxxxxxxx";
+mysql> CREATE DATABASE IBookmark CHARACTER SET utf8;
+mysql> GRANT ALL PRIVILEGES ON IBookmark.* TO "IBookmarkuser"@"localhost" IDENTIFIED BY "xxxxxxxx";
 mysql> FLUSH PRIVILEGES;
 mysql> EXIT;
 
@@ -34,10 +34,10 @@ sudo vi /etc/httpd/conf.d/wsgi.conf
 #----------Begin----------#
 LoadModule wsgi_module modules/mod_wsgi.so
 WSGISocketPrefix run/wsgi
-WSGIDaemonProcess cbk python-path=/home/ec2-user/cbk/env/lib64/python2.6/site-packages/
-WSGIProcessGroup cbk
-WSGIScriptAlias / /home/ec2-user/cbk/webapp/wsgi.py
-Alias /site_media/ /home/ec2-user/cbk/webapp/site_media/
+WSGIDaemonProcess IBookmark python-path=/home/ec2-user/IBookmark/env/lib64/python2.6/site-packages/
+WSGIProcessGroup IBookmark
+WSGIScriptAlias / /home/ec2-user/IBookmark/webapp/wsgi.py
+Alias /site_media/ /home/ec2-user/IBookmark/webapp/site_media/
 #-----------End-----------#
 sudo vi /etc/httpd/conf/httpd.conf
 User ec2-user
@@ -46,18 +46,18 @@ User ec2-user
 vi webapp/local_settings.py
 DATABASES = {
     'default': {
-        'ENGINE'   : 'django.db.backends.mysql',
-        'NAME'     : 'cbk',
-        'USER'     : 'cbkuser',
+        'ENGINE' : 'django.db.backends.mysql',
+        'NAME' : 'IBookmark',
+        'USER' : 'IBookmarkuser',
         'PASSWORD' : 'xxxxxxxx',
-        'HOST'     : '',
-        'PORT'     : '',
+        'HOST' : '',
+        'PORT' : '',
     }
 }
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'xxx@gmail.com'
+EMAIL_HOST = 'mail host here'
+EMAIL_PORT = 'mail port here'
+EMAIL_HOST_USER = 'xxx@mail host here'
 EMAIL_HOST_PASSWORD = 'xxx'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
