@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^/tag/my/$', 'bookmark.views.my_tag', name='my_tag'),
     url(r'^/tag/$', 'bookmark.views.tag', name='tag'),
     url(r'^/rss/$', BookmarkFeed(), name='rss'),
+    url(r'^/tzdemo/$', 'bookmark.views.tzdemo')
 
 )
 

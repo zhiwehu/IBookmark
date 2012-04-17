@@ -99,3 +99,20 @@ def export_bookmark(request):
     response['Content-Disposition'] = 'attachment; filename=bookmarks.html'
     response.write(export_data)
     return response
+
+def tzdemo(request):
+    import tz
+    ip_address=request.GET.get('ip', '64.68.119.49')
+    #ip_address='64.68.119.49'
+    response = HttpResponse()
+    geo, timezone = tz.ip_to_tz(ip_address)
+    geo_String = ''
+    timezone_String = ''
+    if geo:
+        geo_String= 'Country=%s, CountryCode=%s, City=%s' % (geo['country'], geo['countrycode'], geo['city'])
+    if timezone:
+        timezone_String= 'TZ_Name=%s, UTC_Offset=%s' % (timezone.tzname(), timezone.utcoffset())
+    response.write(geo_String)
+    response.write('<p></p>')
+    response.write(timezone_String)
+    return response
