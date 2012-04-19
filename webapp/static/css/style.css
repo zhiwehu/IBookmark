@@ -174,3 +174,26 @@ body {
     margin-right: 10px;
     margin-top: 4px;
 }
+
+.box {
+    margin: 5px;
+    padding: 5px;
+    /*background: #D8D5D2;*/
+    font-size: 11px;
+    line-height: 1.4em;
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.box h2 {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.box img,
+#tumblelog img {
+    display: block;
+    width: 100%;
+}

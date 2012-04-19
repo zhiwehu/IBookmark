@@ -24,13 +24,12 @@
         })();
     </script>
     <script id="bookmark_screen_shot" type="text/x-jquery-tmpl">
-        <li class="span3">
-            <div>
+            <div class="box thumbnail">
                 <a href="${url}" target="_blank">
                     {% templatetag openvariable %}if screen_shot == ""{% templatetag closevariable %}
-                    <img class="thumbnail" src="http://placehold.it/256x192&text=Image+not+ready" alt="${url}" title="${url}">
+                    <img src="http://placehold.it/256x192&text=Image+not+ready" alt="${url}" title="${url}">
                     {% templatetag openvariable %}else{% templatetag closevariable %}
-                    <img class="thumbnail" width="256" height="192" src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}">
+                    <img src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}">
                     {% templatetag openvariable %}/if{% templatetag closevariable %}
                 </a>
                 <h5>{% trans "Title" %} : ${title}</h5>
@@ -62,7 +61,6 @@
                 </div>
                 </p>
             </div>
-        </li>
     </script>
     <script id="bookmark_row" type="text/x-jquery-tmpl">
         <tr>
@@ -497,9 +495,9 @@
         </tbody>
     </table>
 
-    <ul id="bookmark_screen_shots" class="thumbnails">
+    <div id="bookmark_screen_shots" class="clearfix">
 
-    </ul>
+    </div>
 
     <div class="row">
         <div id="per_page_number_div" class="pagination span4">
