@@ -24,32 +24,35 @@
     </script>
 
     <script id="bookmark_screen_shot" type="text/x-jquery-tmpl">
-            <div class="box thumbnail span3">
-                <a href="${url}" target="_blank">
-                    {% templatetag openvariable %}if screen_shot == ""{% templatetag closevariable %}
-                    <img src="http://placehold.it/256x192&text=Image+not+ready" alt="${url}" title="${url}">
-                    {% templatetag openvariable %}else{% templatetag closevariable %}
-                    <img src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}">
-                    {% templatetag openvariable %}/if{% templatetag closevariable %}
+        <div class="box thumbnail span3">
+            <a href="${url}" target="_blank">
+                {% templatetag openvariable %}if screen_shot == ""{% templatetag closevariable %}
+                <img src="http://placehold.it/256x192&text=Image+not+ready" alt="${url}" title="${url}">
+                {% templatetag openvariable %}else{% templatetag closevariable %}
+                <img src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}">
+                {% templatetag openvariable %}/if{% templatetag closevariable %}
+            </a>
+            <h5>{% trans "Title" %} : ${title}</h5>
+
+            <p> {% trans "Tags" %} :
+                {% templatetag openvariable %}each(i, tag) tags{% templatetag closevariable %}
+                <a class="tag" href="{% url api_bookmarks %}?tag=${tag.id}"><span
+                        class="label label-info" value="${tag.name}">${tag.name}</span></a>
+                {% templatetag openvariable %}/each{% templatetag closevariable %}
+            </p>
+
+            <p>
+                <i class="icon-user"></i>
+                <a class="owner" href="{% url api_bookmarks %}?owner_id=${owner.id}">
+                    ${owner.username}
                 </a>
-                <h5>{% trans "Title" %} : ${title}</h5>
-                <p> {% trans "Tags" %} :
-                    {% templatetag openvariable %}each(i, tag) tags{% templatetag closevariable %}
-                    <a class="tag" href="{% url api_bookmarks %}?tag=${tag.id}"><span
-                            class="label label-info" value="${tag.name}">${tag.name}</span></a>
-                    {% templatetag openvariable %}/each{% templatetag closevariable %}
-                </p>
-                <p>
-                    <i class="icon-user"></i>
-                    <a class="owner" href="{% url api_bookmarks %}?owner_id=${owner.id}">
-                        ${owner.username}
-                    </a>
-                </p>
-            </div>
+            </p>
+        </div>
     </script>
 
     <script type="text/javascript">
-        var api_url = "{% url api_bookmarks %}"
+        var api_url = "{% url api_bookmarks %}";
+        var masonried = false;
 
         function update_parameter(a, k, v) {
             var re = new RegExp("([?|&])" + k + "=.*?(&|$)", "i"),
@@ -72,6 +75,17 @@
                         $("#bookmark_screen_shots").empty();
                         $("#bookmark_screen_shots").html('<li>{% trans "No Data" %}</li>');
                     }
+
+                    $("#bookmark_screen_shots").imagesLoaded(function () {
+                        if (masonried) {
+                            $("#bookmark_screen_shots").masonry("reload");
+                        } else {
+                            $("#bookmark_screen_shots").masonry({
+                                itemSelector:'.box'
+                            });
+                            masonried = true;
+                        }
+                    });
                 },
                 dataType:"json"
             });
@@ -85,7 +99,7 @@
                     , navTop = $('.subnav').length && $('.subnav').offset().top - 40
                     , isFixed = 0
 
-            processScroll()
+            processScroll();
 
             $win.on('scroll', processScroll)
 
@@ -103,13 +117,20 @@
             // Add loading
             $("#main_page")
                     .ajaxStart(function () {
-                        $(this).mask("{% trans 'Loading...' %}")
+                        $(this).mask("{% trans 'Loading...' %}");
                     })
                     .ajaxComplete(function () {
                         $(this).unmask();
                     });
 
             render_bookmark(30);
+
+            /*$("#bookmark_screen_shots").imagesLoaded( function(){
+             $("#bookmark_screen_shots").masonry({
+             itemSelector: '.box'
+             });
+             });*/
+
 
             // Search by tag
             $("body").delegate("a.tag", "click", function () {
@@ -134,40 +155,33 @@
                 render_bookmark(30);
                 return false;
             });
-
-            var $container = $('#bookmark_screen_shots');
-
-            $container.imagesLoaded( function(){
-                $container.masonry({
-                    itemSelector : '.box'
-                });
-            })
         });
     </script>
 {% endblock %}
 
 {% block body %}
     <div id="main_page">
-    {% include "bookmark/_menu.html" %}
-    {% if not request.user.is_authenticated %}
-    <div class="alert alert-block alert-info">
-        <a data-dismiss="alert" class="close">&times;</a>
-        <h4 class="alert-heading">Welcome!</h4>
-        <ul>
-            <li>Free to usage! <a href="{% url acct_signup %}">Signup now!</a></li>
-            <li>Manage your bookmarks with tags online.</li>
-            <li>It can import the bookmarks from Firefox, Safari, Chrome, etc.</li>
-            <li>It can import the bookmarks from google bookmark, delicious, etc</li>
-            <li>It can export the bookmarks for Firefox, Safari, Chrome and google, delicious, etc</li>
-        </ul>
-    </div>
-    {% endif %}
-    <h1 id="data_title">
-        {% trans "Latest bookmarks" %}
-    </h1>
-    <div id="bookmark_screen_shots" class="clearfix">
+        {% include "bookmark/_menu.html" %}
+        {% if not request.user.is_authenticated %}
+            <div class="alert alert-block alert-info">
+                <a data-dismiss="alert" class="close">&times;</a>
+                <h4 class="alert-heading">Welcome!</h4>
+                <ul>
+                    <li>Free to usage! <a href="{% url acct_signup %}">Signup now!</a></li>
+                    <li>Manage your bookmarks with tags online.</li>
+                    <li>It can import the bookmarks from Firefox, Safari, Chrome, etc.</li>
+                    <li>It can import the bookmarks from google bookmark, delicious, etc</li>
+                    <li>It can export the bookmarks for Firefox, Safari, Chrome and google, delicious, etc</li>
+                </ul>
+            </div>
+        {% endif %}
+        <h1 id="data_title">
+            {% trans "Latest bookmarks" %}
+        </h1>
 
-    </div>
+        <div id="bookmark_screen_shots" class="clearfix">
+
+        </div>
     </div>
 {% endblock %}
 
