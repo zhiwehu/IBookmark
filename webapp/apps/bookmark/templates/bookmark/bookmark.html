@@ -122,7 +122,7 @@
             // Search by owner
             $("body").delegate("a.owner", "click", function () {
                 api_url = $(this).attr("href");
-                $("#data_title").html('{% trans "Bookmarks owner by" %} ' + $(this).html());
+                $("#data_title").html('{% trans "Bookmarks owner by " %} ' + $(this).html());
                 render_bookmark(30);
                 return false;
             });
@@ -130,6 +130,7 @@
             // submit data to create bookmark
             $("#search_form").submit(function () {
                 api_url = update_parameter(api_url, "keyword", $("#keyword").val());
+                $("#data_title").html('{% trans "Bookmarks searched by " %} ' + $("#keyword").val());
                 render_bookmark(30);
                 return false;
             });
