@@ -174,7 +174,7 @@
                 $("#bookmark_screen_shots").html('<li>{% trans "No Data" %}</li>');
             }
 
-            $("#bookmark_screen_shots").imagesLoaded(function () {
+            //$("#bookmark_screen_shots").imagesLoaded(function () {
                 if (masonried) {
                     $("#bookmark_screen_shots").masonry("reload");
                 } else {
@@ -183,7 +183,7 @@
                     });
                     masonried = true;
                 }
-            });
+            //});
 
         }
     }
