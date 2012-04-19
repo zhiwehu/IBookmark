@@ -24,12 +24,12 @@
 
     <script id="bookmark_screen_shot" type="text/x-jquery-tmpl">
         <li class="span3">
-            <div class="thumbnail">
+            <div>
                 <a href="${url}" target="_blank">
                     {% templatetag openvariable %}if screen_shot == ""{% templatetag closevariable %}
-                    <img src="http://placehold.it/256x192&text=Image+not+ready" alt="${url}" title="${url}">
+                    <img class="thumbnail" width="256" height="192" src="http://placehold.it/256x192&text=Image+not+ready" alt="${url}" title="${url}">
                     {% templatetag openvariable %}else{% templatetag closevariable %}
-                    <img width="256" height="192" src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}">
+                    <img class="thumbnail" width="256" height="192" src="{{ MEDIA_URL }}${screen_shot}" alt="${url}" title="${url}">
                     {% templatetag openvariable %}/if{% templatetag closevariable %}
                 </a>
                 <h5>{% trans "Title" %} : ${title}</h5>
