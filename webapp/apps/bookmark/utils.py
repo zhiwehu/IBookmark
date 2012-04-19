@@ -4,6 +4,7 @@ import uuid
 from django.core.files.base import ContentFile
 import os
 import BeautifulSoup
+from webapp.apps.bookmark.models import Bookmark
 
 def get_title_by_url(url):
     title = None
@@ -126,8 +127,15 @@ def update_bk_screen_shot(bookmark):
             os.remove(bookmark.screen_shot.path)
         except:
             pass
-        bookmark.screen_shot.save(image_file_name, ContentFile(image))
-        bookmark.save()
+        bookmark_id = bookmark.id
+        # Retreve the bookmark again make sure the bookmark others data is correct
+        try:
+            bookmark = Bookmark.objects.get(id=bookmark_id)
+            if bookmark:
+                bookmark.screen_shot.save(image_file_name, ContentFile(image))
+                bookmark.save()
+        except:
+            pass
 
 class BookmarkThread(threading.Thread):
     def __init__(self, bookmark):
