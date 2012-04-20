@@ -171,7 +171,7 @@
             if (bookmarks_data != null && bookmarks_data.length > 0) {
                 $("#bookmark_screen_shot").tmpl(bookmarks_data).appendTo("#bookmark_screen_shots");
             } else {
-                $("#bookmark_screen_shots").html('<li>{% trans "No Data" %}</li>');
+                $("#bookmark_screen_shots").html('{% trans "No Data" %}');
             }
 
             $("#bookmark_screen_shots").imagesLoaded(function () {
@@ -194,7 +194,7 @@
             $("#bookmarks_table tbody").html('<tr><td colspan="6">{% trans "No Data" %}</td></tr>');
         } else {
             $("#bookmark_screen_shots").empty();
-            $("#bookmark_screen_shots").html('<li>{% trans "No Data" %}</li>');
+            $("#bookmark_screen_shots").html('{% trans "No Data" %}');
         }
     }
 

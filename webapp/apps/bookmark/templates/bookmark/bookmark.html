@@ -73,7 +73,7 @@
                         $("#bookmark_screen_shot").tmpl(bookmarks.data).appendTo("#bookmark_screen_shots");
                     } else {
                         $("#bookmark_screen_shots").empty();
-                        $("#bookmark_screen_shots").html('<li>{% trans "No Data" %}</li>');
+                        $("#bookmark_screen_shots").html('{% trans "No Data" %}');
                     }
 
                     $("#bookmark_screen_shots").imagesLoaded(function () {
@@ -124,13 +124,6 @@
                     });
 
             render_bookmark(30);
-
-            /*$("#bookmark_screen_shots").imagesLoaded( function(){
-             $("#bookmark_screen_shots").masonry({
-             itemSelector: '.box'
-             });
-             });*/
-
 
             // Search by tag
             $("body").delegate("a.tag", "click", function () {
